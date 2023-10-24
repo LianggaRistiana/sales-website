@@ -16,14 +16,6 @@ export default function Home() {
     <>
         {/* <NavbarComponents /> */}
         <NavbarTest/>
-      <div className="px-24">
-      </div>
-        <HeroComponent/>
-        <TrendStyle/>
-        <BestSellersComponent/>
-        <NewCollectionComponent/>
-        <NewStuffComponents/>
-        <SportCollectionComponent/>
     </>
   );
 }

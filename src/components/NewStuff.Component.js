@@ -1,19 +1,18 @@
 import React from "react";
 import Image from "next/image";
-import { stuffItem } from "@/data-const";
 import { Button } from "@nextui-org/react";
+import { newStuff } from "@/data-const";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-
-export default function BestSellersComponent() {
+export default function NewStuffComponents() {
   return (
     <>
-      <div className="bg-[#B5F1CC] py-8 mt-20 w-full">
+      <div id="all-new" className="bg-[#D9F0F4] py-8 mt-20 w-full">
         <div className="flex justify-between  mx-24 ">
-          <h1 className="text-[24px] font-bold">Best Seller</h1>
+          <h1 className="text-[24px] font-bold">New Stuff</h1>
         </div>
-        <div className="flex justify-center max-w-[2000px] mt-8 mx-24">
-          {stuffItem.map((data) => {
+        <div className="grid grid-cols-4 gap-4 place-items-center  mt-8 mx-24">
+          {newStuff.map((data) => {
             return (
               <Stuff
                 key={data.id}
@@ -26,10 +25,7 @@ export default function BestSellersComponent() {
         </div>
       </div>
       <div className="flex justify-center mt-8">
-        <Button
-        radius="full"
-          className="bg-[#B5F1CC] font-semibold px-32"
-        >
+        <Button radius="full" className="bg-[#D9F0F4] font-semibold px-32">
           See All <FontAwesomeIcon icon={faArrowRight} />
         </Button>
       </div>

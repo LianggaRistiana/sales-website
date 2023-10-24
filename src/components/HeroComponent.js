@@ -8,7 +8,12 @@ export default function HeroComponent() {
     <div className="flex justify-between relative">
       {/* Main Image */}
       <div className="mt-5">
-        <Image src="/images/main-image.svg" height={809} width={497}></Image>
+        <Image
+          src="/images/main-image.svg"
+          alt="Main Picture"
+          height={809}
+          width={497}
+        ></Image>
         {/* <img src="/images/main-image.svg">
                 </img> */}
       </div>
@@ -28,17 +33,19 @@ export default function HeroComponent() {
           >
             For Men
           </Button>
-          <Button
-            radius="full"
-            className=" font-semibold px-20"
-            color="warning"
-            variant="bordered"
-          >
-            For Women
-          </Button>
+          <Link href="/for-women">
+            <Button
+              radius="full"
+              className=" font-semibold px-20"
+              color="warning"
+              variant="bordered"
+            >
+              For Women
+            </Button>
+          </Link>
         </div>
         <div className="flex mt-24 justify-center">
-          <div className="max-w-[500px] bg-[#D9F0F4] px-32 py-8 rounded-md   " >
+          <div className="max-w-[500px] bg-[#D9F0F4] px-32 py-8 rounded-md   ">
             <h2 className="text-[24px] justify-center ">
               &quot;You can have anything you want in life if you dress for it.
               &quot;

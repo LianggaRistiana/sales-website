@@ -1,5 +1,9 @@
 import React from "react";
 import { navbarItems } from "@/data-const";
+// import React, { useState } from "react";
+// import { useScroll } from "react-scroll";
+
+
 import {
   Navbar,
   NavbarBrand,
@@ -14,6 +18,12 @@ import {
 // import {AcmeLogo} from "./AcmeLogo.jsx";
 
 export default function NavbarTest() {
+  // const scrollToMyElement = () => {
+  //   scroll.scrollTo({
+  //     element: document.querySelector("#add-new"),
+  //   });
+  // };
+
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const menuItems = ["Home", "All New", "Categories", "About Us"];
 
@@ -40,10 +50,10 @@ export default function NavbarTest() {
               <Link
                 href={data.path}
                 className="text-black"
-                // className={`${
-                //   data.title === "Home"
-                //     ? "text-[#FF922F] border-b-2 border-[#FF922F]"
-                //     : "text-black"
+                // onClick={`${
+                //   data.title === "All New"
+                //     ? scrollToMyElement()
+                //     :""
                 // }`}
               >
                 {data.title}

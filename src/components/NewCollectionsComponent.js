@@ -2,6 +2,8 @@ import React from "react";
 import Image from "next/image";
 import { collectionItem } from "@/data-const";
 import { Button } from "@nextui-org/react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 export default function NewCollectionComponent() {
   return (
@@ -18,7 +20,7 @@ export default function NewCollectionComponent() {
       </div>
       <div className="flex justify-center mt-8">
         <Button radius="full" className="font-semibold px-32" variant="bordered">
-          See All
+          See All<FontAwesomeIcon icon={faArrowRight} />
         </Button>
       </div>
     </>
