@@ -24,14 +24,14 @@ export default function BestSellersComponent() {
             );
           })}
         </div>
-      </div>
-      <div className="flex justify-center mt-8">
-        <Button
-        radius="full"
-          className="bg-[#B5F1CC] font-semibold px-32"
-        >
-          See All <FontAwesomeIcon icon={faArrowRight} />
-        </Button>
+        <div className="flex justify-center mt-8">
+          <Button
+            radius="full"
+            className="bg-[#000000] text-[#D9F0F4] font-semibold px-32"
+          >
+            See All <FontAwesomeIcon icon={faArrowRight} />
+          </Button>
+        </div>
       </div>
     </>
   );

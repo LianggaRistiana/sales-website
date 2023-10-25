@@ -17,7 +17,7 @@ import {
 } from "@nextui-org/react";
 // import {AcmeLogo} from "./AcmeLogo.jsx";
 
-export default function NavbarTest() {
+export default function NavbarComponent() {
   // const scrollToMyElement = () => {
   //   scroll.scrollTo({
   //     element: document.querySelector("#add-new"),
