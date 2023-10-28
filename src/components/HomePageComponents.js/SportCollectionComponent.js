@@ -22,7 +22,7 @@ export default function SportCollectionComponent() {
           </h2>
           <Button
             radius="full"
-            className="font-semibold mt-4 px-[56px] bg-[#ffffff]"
+            className="font-semibold mt-4 px-[56px] bg-[#ffffff] transition-transform duration-300 transform-gpu hover:bg-[#000000] hover:text-yellow-500 hover:scale-110"
           >
             See All
             <FontAwesomeIcon icon={faArrowRight} />

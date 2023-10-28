@@ -1,6 +1,4 @@
 import React from "react";
-import Image from "next/image";
-import Link from "next/link";
 // import {Pagination} from "@nextui-org/react";
 // import { Button } from "@nextui-org/react";
 import {
@@ -13,16 +11,17 @@ import {
 } from "@nextui-org/react";
 
 import CollectionComponent from "./UtilComponent/CollectionComponent";
-import TrendStyle from "./HomePageComponents.js/TrendStyle";
-import NewCollectionComponent from "./HomePageComponents.js/NewCollectionsComponent";
+import TrendStyle from "./UtilComponent/TrendStyle";
 import AllStuffComponent from "./UtilComponent/AllStuffComponent";
+import SeeAllButton from "./UtilComponent/SeeAllButton";
+import { collectionItem, womenStuff } from "@/data-const";
 
 // import SportCollectionComponent from "./SportCollectionComponent";
 
 export default function ForWomenComponent() {
   return (
-    <div className="mx-12 mt-4 relative flex">
-      <div className="sticky max-h-48 rounded-lg top-24 bg-[#000000] ml-2 px-8 lg:ml-12">
+    <div className="">
+      {/* <div className="sticky max-h-48 rounded-lg top-24 bg-[#000000] ml-2 px-8 lg:ml-12">
         <h1 className="font-bold text-[32px] text-white">For Women</h1>
         <h2 className="ml-2 font-bold text-[16px] text-default-300">
           Current Trend
@@ -33,13 +32,17 @@ export default function ForWomenComponent() {
         <h2 className="ml-2 font-bold text-[16px] text-default-300">
           All Stuff
         </h2>
-      </div>
+      </div> */}
       <div className=" ml-24">
         <div className="bg-">
           <TrendStyle />
         </div>
         {/* <NewCollectionComponent /> */}
-        <CollectionComponent />
+        <div className={`flex justify-between mt-24 mb-8`}>
+          <h1 className="text-[24px] font-bold">New Collection</h1>
+        </div>
+        <CollectionComponent/>
+        <SeeAllButton variant={`bordered`} yMargin={8}/>
         <div className="mt-12">
           <h1 className="font-bold my-4 text-[24px]">Fashion For Women</h1>
           <div className="flex justify-between">
@@ -59,8 +62,7 @@ export default function ForWomenComponent() {
               <DropdownButton />
             </div>
           </div>
-
-          <AllStuffComponent />
+          <AllStuffComponent comp={2} large={3} items={collectionItem}/>
         </div>
         <PageButton />
         <div className="bg-[#D9F0F4] mt-4">
@@ -78,7 +80,13 @@ export default function ForWomenComponent() {
 function PageButton() {
   return (
     <div className="flex justify-center mt-8">
-      <Pagination color="warning" isCompact showControls total={10} initialPage={1} />
+      <Pagination
+        color="warning"
+        isCompact
+        showControls
+        total={10}
+        initialPage={1}
+      />
     </div>
   );
 }

@@ -1,28 +1,42 @@
 import React from "react";
 import AllStuffComponent from "../UtilComponent/AllStuffComponent";
-import { Button } from "@nextui-org/react";
+import { Button, Tabs, Tab, Card, CardBody } from "@nextui-org/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import CollectionComponent from "../UtilComponent/CollectionComponent";
+import SeeAllButton from "../UtilComponent/SeeAllButton";
+import { womenStuff } from "@/data-const";
 
 function HomeStuffComponent() {
+
   return (
-    <div className="mt-20">
-      <div id="all-new" className="bg-[#D9F0F4] py-4  w-full">
-        <div className="flex justify-between  mx-24 ">
+    <div className="">
+      <div id="all-new" className=" mt-20 mb-8 bg-[#D9F0F4] py-4  w-full">
+        <div className="flex justify-between  mx-[6rem] ">
           <h1 className="text-[24px] font-bold">New Stuff</h1>
         </div>
-        <div className="mx-24">
-          <AllStuffComponent />
-          <div className="flex justify-center mt-8"></div>
+        <div className="mx-[6rem]">
+          {/* <AllStuffComponent /> */}
+          <div className="flex w-full flex-col">
+            <Tabs aria-label="Options" variant="underlined">
+              <Tab key="For Men" title="For Men">
+                <Card>
+                  <CardBody>
+                    <AllStuffComponent gap={4} large={4} comp={1} items={womenStuff}/>
+                  </CardBody>
+                </Card>
+              </Tab>
+              <Tab key="Fow Women" title="For Women">
+                <Card>
+                  <CardBody>
+                    <CollectionComponent />
+                  </CardBody>
+                </Card>
+              </Tab>
+            </Tabs>
+          </div>
         </div>
-        <div className="mt-4 flex justify-center">
-          <Button
-            radius="full"
-            className="bg-[#000000] text-white font-semibold px-32"
-          >
-            See All <FontAwesomeIcon icon={faArrowRight} />
-          </Button>
-        </div>
+        <SeeAllButton classNamed={`bg-[#000000] text-white`} yMargin={4} path={`/all-stuff`}/>
       </div>
     </div>
   );

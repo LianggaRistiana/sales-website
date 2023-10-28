@@ -11,37 +11,29 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { collectionItem } from "@/data-const";
+import Link from "next/link";
 
 export default function CollectionComponent(props) {
+  const items = props.items;
   return (
     <>
-      <div className={`flex justify-between mt-24 mx-[${props.margin}rem]`}>
-          <h1 className="text-[24px] font-bold">New Collection</h1>
-        </div>
-      <div className={`mx-[${props.margin}rem] mt-8`}>
-        <div className="gap-8 grid flex justify-center grid-cols-12 grid-rows-1">
-          {collectionItem.map((data) => {
+      <div className={`mx-[${props.margin}rem]`}>
+        <div className="gap-8 grid flex justify-center grid-cols-3 grid-rows-1">
+          {items.map((data) => {
             return (
               <>
-                <CardCollections
-                  key={data.id}
-                  src={data.path}
-                  title={data.title}
-                />
+                <Link href={"/all-stuff"}>
+                  <CardCollections
+                    key={data.id}
+                    src={data.path}
+                    title={data.title}
+                    delay={(data.id % 3) * 150}
+                  />
+                </Link>
               </>
             );
           })}
         </div>
-      </div>
-      <div className="flex justify-center mt-8">
-        <Button
-          radius="full"
-          className="font-semibold px-32"
-          variant="bordered"
-        >
-          See All
-          <FontAwesomeIcon icon={faArrowRight} />
-        </Button>
       </div>
     </>
   );
@@ -54,20 +46,24 @@ function CardCollections(props) {
     //   <h1>{props.src}</h1>
     //   <h1>{props.title}</h1>
     // </>
-    <Card
-      className="col-span-12 sm:col-span-4 h-[300px] w-full "
-      isPressable
-      onPress={() => console.log("item pressed")}
-    >
-      <CardHeader className="absolute z-10 top-1 justify-center !items-start">
-        <h4 className="text-white font-bold text-center text-large">{props.title}</h4>
-      </CardHeader>
-      <Image
-        removeWrapper
-        alt={props.tittle}
-        className="z-0 w-full h-full object-cover"
-        src={props.src}
-      />
-    </Card>
+    <div data-aos="fade-up" data-aos-delay={`${props.delay}`}>
+      <Card
+        className="col-span-12 sm:col-span-4 h-[300px] w-full  transition-transform duration-300 transform-gpu hover:scale-95"
+        isPressable
+        onPress={() => console.log("item pressed")}
+      >
+        <CardHeader className="absolute z-10 top-1 justify-center !items-start">
+          <h4 className="text-white font-bold text-center text-large">
+            {props.title}
+          </h4>
+        </CardHeader>
+        <Image
+          removeWrapper
+          alt={props.tittle}
+          className="z-0 w-full h-full object-cover"
+          src={props.src}
+        />
+      </Card>
+    </div>
   );
 }

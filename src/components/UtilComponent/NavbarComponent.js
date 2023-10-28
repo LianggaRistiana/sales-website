@@ -3,7 +3,6 @@ import { navbarItems } from "@/data-const";
 // import React, { useState } from "react";
 // import { useScroll } from "react-scroll";
 
-
 import {
   Navbar,
   NavbarBrand,
@@ -14,8 +13,22 @@ import {
   NavbarMenu,
   NavbarMenuItem,
   NavbarMenuToggle,
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  useDisclosure,
+  Tab,
+  Tabs,
+  Input,
+  Card,
+  CardBody
 } from "@nextui-org/react";
 // import {AcmeLogo} from "./AcmeLogo.jsx";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 export default function NavbarComponent() {
   // const scrollToMyElement = () => {
@@ -24,9 +37,10 @@ export default function NavbarComponent() {
   //   });
   // };
 
+  const [selected, setSelected] = React.useState("login");
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const menuItems = ["Home", "All New", "Categories", "About Us"];
-
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
   return (
     <Navbar>
       <NavbarContent>
@@ -40,13 +54,10 @@ export default function NavbarComponent() {
         </NavbarBrand>
       </NavbarContent>
 
-      <NavbarContent
-        className="hidden sm:flex gap-4"
-        justify="end"
-      >
+      <NavbarContent className="hidden sm:flex gap-4" justify="end">
         {navbarItems.map((data) => {
           return (
-            <NavbarItem key={data.id} className="px-5" >
+            <NavbarItem key={data.id} className="px-5">
               <Link
                 href={data.path}
                 className="text-black"
@@ -70,13 +81,93 @@ export default function NavbarComponent() {
       </NavbarContent>
 
       <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex  font-semibold px-6">
-          <Link className="text-black" href="#">Login</Link>
+        <NavbarItem className=" font-semibold ">
+          <Button
+            onPress={onOpen}
+            className="text-black transition-transform duration-300 transform-gpu hover:bg-[#000000] hover:text-yellow-500 hover:scale-90"
+            variant="bordered"
+          >
+            <FontAwesomeIcon icon={faUser} />
+          </Button>
+          <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+            <ModalContent>
+              {(onClose) => (
+                <div className="flex flex-col w-full px-12 py-8">
+                  <Tabs
+                      fullWidth
+                      size="md"
+                      aria-label="Tabs form"
+                      selectedKey={selected}
+                      onSelectionChange={setSelected}
+                    >
+                      <Tab key="login" title="Login">
+                        <form className="flex flex-col gap-4">
+                          <Input isRequired label="Email" placeholder="Enter your email" type="email" />
+                          <Input
+                            isRequired
+                            label="Password"
+                            placeholder="Enter your password"
+                            type="password"
+                          />
+                          <p className="text-center text-small">
+                            Need to create an account?{" "}
+                            <Link size="sm" onPress={() => setSelected("sign-up")}>
+                              Sign up
+                            </Link>
+                          </p>
+                          <div className="flex gap-2 justify-end">
+                            <Button fullWidth className="text-white bg-[#000000] transition-transform duration-300 transform-gpu hover:bg-[#eab308] hover:text-black hover:scale-90" >
+                              Login
+                            </Button>
+                          </div>
+                        </form>
+                      </Tab>
+                      <Tab key="sign-up" title="Sign up">
+                        <form className="flex flex-col gap-4 h-[300px]">
+                          <Input isRequired label="Name" placeholder="Enter your name" type="password" />
+                          <Input isRequired label="Email" placeholder="Enter your email" type="email" />
+                          <Input
+                            isRequired
+                            label="Password"
+                            placeholder="Enter your password"
+                            type="password"
+                          />
+                          <p className="text-center text-small">
+                            Already have an account?{" "}
+                            <Link size="sm" onPress={() => setSelected("login")}>
+                              Login
+                            </Link>
+                          </p>
+                          <div className="flex gap-2 justify-end">
+                            <Button fullWidth className="text-white bg-[#000000] transition-transform duration-300 transform-gpu hover:bg-[#eab308] hover:text-black hover:scale-90">
+                              Sign up
+                            </Button>
+                          </div>
+                        </form>
+                      </Tab>
+                    </Tabs>
+                {/* <Card className="max-w-full w-[340px] h-[400px]">
+                  <CardBody className="overflow-hidden">
+                    
+                  </CardBody>
+                </Card> */}
+              </div>
+              )}
+            </ModalContent>
+          </Modal>
         </NavbarItem>
         <NavbarItem>
-          <Button as={Link} className="bg-[#FB9C46] text-white font-semibold px-6" href="#" variant="flat">
+          <Link href="/cart">
+            <Button
+              isIconOnly
+              className="bg-[#000000] text-white transition-transform duration-300 transform-gpu hover:bg-[#eab308] hover:text-white hover:scale-90"
+            >
+              <FontAwesomeIcon icon={faCartShopping} />
+            </Button>
+          </Link>
+          {/* <Button as={Link} className="bg-[#FB9C46] text-white font-semibold px-6" href="#" variant="flat">
             Sign Up
-          </Button>
+          </Button> */}
         </NavbarItem>
       </NavbarContent>
 
@@ -84,15 +175,15 @@ export default function NavbarComponent() {
         {navbarItems.map((data) => (
           <NavbarMenuItem key={`${data.title}-${data.id}`}>
             <Link
-            //   color={
-            //     data.id === 2
-            //       ? "primary"
-            //       : data.id === menuItems.length - 1
-            //       ? "danger"
-            //       : "foreground"
-            //   }
+              //   color={
+              //     data.id === 2
+              //       ? "primary"
+              //       : data.id === menuItems.length - 1
+              //       ? "danger"
+              //       : "foreground"
+              //   }
               className="w-full text-black"
-              href="#"
+              href={data.path}
               size="lg"
             >
               {data.title}
@@ -100,7 +191,6 @@ export default function NavbarComponent() {
           </NavbarMenuItem>
         ))}
       </NavbarMenu>
-
     </Navbar>
   );
 }

@@ -27,16 +27,18 @@ export default function HeroComponent() {
         </h2>
 
         <div className="flex justify-between mt-8">
-          <Button
-            radius="full"
-            className="bg-[#FB9C46] text-white font-semibold px-20"
-          >
-            For Men
-          </Button>
+          <Link href="/for-men">
+            <Button
+              radius="full"
+              className="bg-[#FB9C46] text-white font-semibold px-20 transition-transform duration-300 transform-gpu hover:scale-95 hover:bg-[#000000]"
+            >
+              For Men
+            </Button>
+          </Link>
           <Link href="/for-women">
             <Button
               radius="full"
-              className=" font-semibold px-20"
+              className=" font-semibold px-20 transition-transform duration-300 transform-gpu hover:scale-95 hover:bg-[#000000]"
               color="warning"
               variant="bordered"
             >

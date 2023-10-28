@@ -8,14 +8,21 @@ export default function TrendStyle(props) {
   return (
     <>
       <div className={`flex justify-between mt-${topMargin} mx-${xMargin}`}>
-        <h1 className="text-[24px] font-bold">Current Trend</h1>
+        <h1 className="text-[24px] font-bold">Brand Ambassador</h1>
         {/* <img src="/images/profil-person/profil1.svg"></img> */}
       </div>
-      <div className={`flex justify-center max-w-[2000px] mt-8 mx-${xMargin}`}>
+      <div
+        className={`flex justify-center max-w-[2000px] mx-${xMargin} gap-4 grid grid-cols-3 sm:grid-cols-6 mt-8`}
+      >
         {profilPerson.map((data) => {
-            return (
-                <Profil key={data.id} source={data.path} name={data.title}/>
-            );
+          return (
+            <Profil
+              key={data.id}
+              source={data.path}
+              name={data.title}
+              delay={(data.id%3) * 150}
+            />
+          );
         })}
       </div>
     </>
@@ -25,7 +32,7 @@ function Profil(props) {
   const source = props.source;
   const name = props.name;
   return (
-    <div className="px-4">
+    <div className="px-4" data-aos="fade-up" data-aos-delay={`${props.delay}`}>
       <Image
         src={source}
         width={250}
