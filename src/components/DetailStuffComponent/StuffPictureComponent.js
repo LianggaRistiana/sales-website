@@ -6,7 +6,8 @@ import { oneStuff } from "@/data-const";
 export default function StuffPictureComponent() {
   return (
     <>
-      <div className="grid gap-4 grid-rows-1 lg:grid-cols-2">
+      <div className="grid gap-4 grid-rows-1 lg:grid-cols-2" data-aos="zoom-out-up"
+        data-delay="500">
         <StuffCard
           id={oneStuff[0].id}
           title={oneStuff[0].title}

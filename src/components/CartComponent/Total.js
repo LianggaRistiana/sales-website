@@ -5,7 +5,11 @@ import { faMoneyBill1Wave } from "@fortawesome/free-solid-svg-icons";
 
 export default function Total() {
   return (
-    <div className="bg-[#e5e7eb] rounded-md mt-8">
+    <div
+      className="bg-[#e5e7eb] rounded-md mt-8"
+      data-aos="fade-up"
+      data-delay="500"
+    >
       <div className="py-4 px-8 bg-[#000000] max-w-full text-white rounded-tr-md rounded-tl-md">
         <h1 className="font-bold text-[24px]">Total Cart</h1>
       </div>

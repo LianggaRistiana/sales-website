@@ -46,7 +46,9 @@ function CardCollections(props) {
     //   <h1>{props.src}</h1>
     //   <h1>{props.title}</h1>
     // </>
-    <div data-aos="fade-up" data-aos-delay={`${props.delay}`}>
+    <div 
+    data-aos="fade-up" data-aos-delay={`${props.delay}`}
+    >
       <Card
         className="col-span-12 sm:col-span-4 h-[300px] w-full  transition-transform duration-300 transform-gpu hover:scale-95"
         isPressable

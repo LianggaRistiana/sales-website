@@ -23,7 +23,7 @@ import {
   Tabs,
   Input,
   Card,
-  CardBody
+  CardBody,
 } from "@nextui-org/react";
 // import {AcmeLogo} from "./AcmeLogo.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -60,7 +60,7 @@ export default function NavbarComponent() {
             <NavbarItem key={data.id} className="px-5">
               <Link
                 href={data.path}
-                className="text-black"
+                className="text-black transition-transform duration-300 transform-gpu hover:text-yellow-500 hover:scale-90 hover:font-bold"
                 // onClick={`${
                 //   data.title === "All New"
                 //     ? scrollToMyElement()
@@ -94,64 +94,104 @@ export default function NavbarComponent() {
               {(onClose) => (
                 <div className="flex flex-col w-full px-12 py-8">
                   <Tabs
-                      fullWidth
-                      size="md"
-                      aria-label="Tabs form"
-                      selectedKey={selected}
-                      onSelectionChange={setSelected}
-                    >
-                      <Tab key="login" title="Login">
-                        <form className="flex flex-col gap-4">
-                          <Input isRequired label="Email" placeholder="Enter your email" type="email" />
-                          <Input
-                            isRequired
-                            label="Password"
-                            placeholder="Enter your password"
-                            type="password"
-                          />
-                          <p className="text-center text-small">
-                            Need to create an account?{" "}
-                            <Link size="sm" onPress={() => setSelected("sign-up")}>
-                              Sign up
-                            </Link>
-                          </p>
-                          <div className="flex gap-2 justify-end">
-                            <Button fullWidth className="text-white bg-[#000000] transition-transform duration-300 transform-gpu hover:bg-[#eab308] hover:text-black hover:scale-90" >
-                              Login
-                            </Button>
-                          </div>
-                        </form>
-                      </Tab>
-                      <Tab key="sign-up" title="Sign up">
-                        <form className="flex flex-col gap-4 h-[300px]">
-                          <Input isRequired label="Name" placeholder="Enter your name" type="password" />
-                          <Input isRequired label="Email" placeholder="Enter your email" type="email" />
-                          <Input
-                            isRequired
-                            label="Password"
-                            placeholder="Enter your password"
-                            type="password"
-                          />
-                          <p className="text-center text-small">
-                            Already have an account?{" "}
-                            <Link size="sm" onPress={() => setSelected("login")}>
-                              Login
-                            </Link>
-                          </p>
-                          <div className="flex gap-2 justify-end">
-                            <Button fullWidth className="text-white bg-[#000000] transition-transform duration-300 transform-gpu hover:bg-[#eab308] hover:text-black hover:scale-90">
-                              Sign up
-                            </Button>
-                          </div>
-                        </form>
-                      </Tab>
-                    </Tabs>
-                {/* <Card className="max-w-full w-[340px] h-[400px]">
+                    fullWidth
+                    size="md"
+                    aria-label="Tabs form"
+                    selectedKey={selected}
+                    onSelectionChange={setSelected}
+                  >
+                    <Tab key="login" title="Login">
+                      <form
+                        className="flex flex-col gap-4"
+                        data-aos="fade-up"
+                        data-delay="500"
+                      >
+                        <Input
+                          isRequired
+                          label="Email"
+                          placeholder="Enter your email"
+                          type="email"
+                        />
+                        <Input
+                          isRequired
+                          label="Password"
+                          placeholder="Enter your password"
+                          type="password"
+                        />
+                        <p className="text-center text-small">
+                          Need to create an account?{" "}
+                          <Link
+                            size="sm"
+                            onPress={() => setSelected("sign-up")}
+                          >
+                            Sign up
+                          </Link>
+                        </p>
+                        <div
+                          className="flex gap-2 justify-end"
+                          data-aos="fade-up"
+                          data-delay="100"
+                        >
+                          <Button
+                            fullWidth
+                            className="text-white bg-[#000000] transition-transform duration-300 transform-gpu hover:bg-[#eab308] hover:text-black hover:scale-90"
+                          >
+                            Login
+                          </Button>
+                        </div>
+                      </form>
+                    </Tab>
+                    <Tab key="sign-up" title="Sign up">
+                      <form
+                        className="flex flex-col gap-4 h-[300px]"
+                        data-aos="fade-up"
+                        data-delay="500"
+                      >
+                        <Input
+                          isRequired
+                          label="Name"
+                          placeholder="Enter your name"
+                          type="password"
+                        />
+                        <Input
+                          isRequired
+                          label="Email"
+                          placeholder="Enter your email"
+                          type="email"
+                        />
+                        <Input
+                          isRequired
+                          label="Password"
+                          placeholder="Enter your password"
+                          type="password"
+                        />
+                        <p className="text-center text-small">
+                          Already have an account?{" "}
+                          <Link size="sm" onPress={() => setSelected("login")}>
+                            Login
+                          </Link>
+                        </p>
+                        <div
+                          className="flex gap-2 justify-end"
+                          data-aos="fade-up"
+                          data-delay="1000"
+                        >
+                          <Button
+                            fullWidth
+                            className="text-white bg-[#000000] transition-transform duration-300 transform-gpu hover:bg-[#eab308] hover:text-black hover:scale-90"
+                          >
+                            Sign up
+                          </Button>
+                        </div>
+                      </form>
+                    </Tab>
+                  </Tabs>
+                  {/* <Card className="max-w-full w-[340px] h-[400px]">
                   <CardBody className="overflow-hidden">
                     
                   </CardBody>
                 </Card> */}
-              </div>
+                </div>
               )}
             </ModalContent>
           </Modal>

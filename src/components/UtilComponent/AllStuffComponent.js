@@ -36,7 +36,9 @@ export default function AllStuffComponent(props) {
 
 function StuffCard(props) {
   return (
-    <div className="" data-aos="fade-up" data-aos-delay={`${props.delay}`}>
+    <div 
+    className="" data-aos="fade-up" data-aos-delay={`${props.delay}`}
+    >
       <Link href={"/detail-stuff"}>
         <Card
           shadow="sm"

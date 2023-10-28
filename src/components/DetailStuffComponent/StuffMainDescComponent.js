@@ -24,7 +24,11 @@ export default function StuffMainDescComponent() {
         </h1>
         <Size />
       </div>
-      <div className="lg:flex text-center lg:justify-between mt-8">
+      <div
+        className="lg:flex text-center lg:justify-between mt-8"
+        data-aos="zoom-out-up"
+        data-delay="500"
+      >
         <BuyButton />
         <Link href="/cart">
           <Button className="hover:bg-[#000000] mt-2 lg:mt-0 px-8 hover:text-yellow-500 transition-transform duration-300 transform-gpu hover:scale-95">
@@ -68,7 +72,11 @@ function BuyButton() {
 }
 function Size() {
   return (
-    <div className="flex flex-col w-[230px]">
+    <div
+      className="flex flex-col w-[230px]"
+      data-aos="zoom-out-up"
+      data-delay="10"
+    >
       <Tabs variant="solid" aria-label="Options">
         <Tab key="XS" title="XS">
           <Card>
