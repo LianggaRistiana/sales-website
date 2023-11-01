@@ -172,9 +172,10 @@ export default function NavbarComponent() {
                           </Link>
                         </p>
                         <div
+                          
                           className="flex gap-2 justify-end"
-                          data-aos="fade-up"
-                          data-delay="1000"
+                          // data-aos="fade-up"
+                          // data-delay="100"
                         >
                           <Button
                             fullWidth

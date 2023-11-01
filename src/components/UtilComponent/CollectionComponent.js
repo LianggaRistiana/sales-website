@@ -18,7 +18,7 @@ export default function CollectionComponent(props) {
   return (
     <>
       <div className={`mx-[${props.margin}rem]`}>
-        <div className="gap-8 grid flex justify-center grid-cols-3 grid-rows-1">
+        <div className="gap-8 grid flex justify-center grid-cols-1 md:grid-cols-3 grid-rows-1">
           {items.map((data) => {
             return (
               <>

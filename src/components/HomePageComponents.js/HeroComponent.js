@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export default function HeroComponent() {
   return (
-    <div className="flex justify-between relative">
+    <div className=" lg:flex lg:justify-between text-center lg:text-left relative">
       {/* Main Image */}
       <div className="mt-5">
         <Image
@@ -18,7 +18,7 @@ export default function HeroComponent() {
                 </img> */}
       </div>
 
-      <div className="mr-20 leading-tight mt-16 max-w-[500px] ">
+      <div className="mx-4 lg:mx-0 mr-20 leading-tight mt-16 max-w-[500px] ">
         <h1 className="font-bold text-[64px] mb-12">
           Everyone has the right to be stylish
         </h1>
@@ -26,11 +26,11 @@ export default function HeroComponent() {
           Pay only for what suits you and what you like!
         </h2>
 
-        <div className="flex justify-between mt-8">
+        <div className="flex justify-center lg:justify-between  mt-8">
           <Link href="/for-men">
             <Button
               radius="full"
-              className="bg-[#FB9C46] text-white font-semibold px-20 transition-transform duration-300 transform-gpu hover:scale-95 hover:bg-[#000000]"
+              className="bg-[#FB9C46] text-white lg:mr-0 mr-2 font-semibold px-12 lg:px-20 transition-transform duration-300 transform-gpu hover:scale-95 hover:bg-[#000000]"
             >
               For Men
             </Button>
@@ -38,7 +38,7 @@ export default function HeroComponent() {
           <Link href="/for-women">
             <Button
               radius="full"
-              className=" font-semibold px-20 transition-transform duration-300 transform-gpu hover:scale-95 hover:bg-[#000000]"
+              className=" font-semibold px-12 lg:px-20 transition-transform duration-300 transform-gpu hover:scale-95 hover:bg-[#000000]"
               color="warning"
               variant="bordered"
             >

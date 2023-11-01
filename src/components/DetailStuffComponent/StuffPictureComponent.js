@@ -6,7 +6,7 @@ import { oneStuff } from "@/data-const";
 export default function StuffPictureComponent() {
   return (
     <>
-      <div className="grid gap-4 grid-rows-1 lg:grid-cols-2" data-aos="zoom-out-up"
+      <div className="grid  gap-4 grid-rows-1 lg:grid-cols-2" data-aos="zoom-out-up"
         data-delay="500">
         <StuffCard
           id={oneStuff[0].id}
@@ -73,7 +73,7 @@ function StuffCard2(props) {
             key={props.id}
             isPressable
             fullWidth
-            className="h-[80px] w-[70px] lg:h-[100px] lg:w-[100px] col-span-12 lg:col-span-4 transition-transform duration-300 transform-gpu hover:scale-90"
+            className="h-[80px] w-full lg:w-[70px] lg:h-[100px] lg:w-[100px] col-span-12 lg:col-span-4 transition-transform duration-300 transform-gpu hover:scale-90"
             onPress={() => console.log("item pressed")}
           >
             <CardBody className="overflow-visible w-full p-0">

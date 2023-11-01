@@ -13,11 +13,11 @@ import CollectionComponent from "@/components/UtilComponent/CollectionComponent"
 import HomeCollectionComponent from "@/components/HomePageComponents.js/HomeCollectionComponent";
 import ScrollToTopButton from "@/components/UtilComponent/ScrollTop";
 import FooterComponent from "@/components/UtilComponent/FooterComponent";
+import { profilPerson } from "@/data-const";
 
-const inter = Inter({ subsets: ["latin"] });  
+const inter = Inter({ subsets: ["latin"] });
 
 // import { AnimationOnScroll } from 'react-animation-on-scroll';
-
 
 export default function Home() {
   return (
@@ -25,15 +25,17 @@ export default function Home() {
       <NavbarComponent />
       <div className="px-24"></div>
       <HeroComponent />
-      <TrendStyle topMargin={20} xMargin={24} />
+      <TrendStyle topMargin={20} xMargin={24} items={profilPerson} />
       <BestSellersComponent />
       {/* <NewCollectionComponent /> */}
       {/* <CollectionComponent margin={6}/> */}
-      <HomeCollectionComponent/>
+      <HomeCollectionComponent />
       <HomeStuffComponent />
       {/* <SportCollectionComponent /> */}
-      <FooterComponent/>
-      <ScrollToTopButton/>
+      <div className="hidden md:flex">
+        <FooterComponent />
+      </div>
+      <ScrollToTopButton />
     </>
   );
 }

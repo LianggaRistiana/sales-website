@@ -7,6 +7,7 @@ import MenStuffComponent from "@/components/ForMen/MenStuffComponent";
 import ScrollToTopButton from "@/components/UtilComponent/ScrollTop";
 import { useState, useEffect } from "react";
 import FooterComponent from "@/components/UtilComponent/FooterComponent";
+import { profilPersonMen } from "@/data-const";
 
 export default function ForMen() {
   const [isSidebarVisible, setIsSidebarVisible] = useState(true);
@@ -36,13 +37,15 @@ export default function ForMen() {
         {isSidebarVisible && <SidebarForMenComponent />}
         <div className={isSidebarVisible ? "ml-4 lg:ml-4" : "ml-6"}></div>
         <div className="sm:ml-4 lg:ml-24">
-          <TrendStyle />
+          <TrendStyle items={profilPersonMen} />
           <CollectionForMenComponent />
           <MenStuffComponent />
         </div>
         <ScrollToTopButton />
       </div>
-      <FooterComponent />
+      <div className="hidden md:flex">
+        <FooterComponent />
+      </div>
     </>
   );
 }

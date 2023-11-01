@@ -8,6 +8,7 @@ import TrendStyle from "@/components/UtilComponent/TrendStyle";
 import WomenStuffComponent from "@/components/ForWomen/WomenStuffComponent";
 import ScrollToTopButton from "@/components/UtilComponent/ScrollTop";
 import FooterComponent from "@/components/UtilComponent/FooterComponent";
+import { profilPersonWomen } from "@/data-const";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -40,14 +41,15 @@ export default function Home() {
         <div className={isSidebarVisible ? 'ml-4 lg:ml-4' : 'ml-6'}></div>
         {/* <SidebarComponent /> */}
         <div className="sm:ml-4 lg:ml-24">
-          <TrendStyle/>
+          <TrendStyle items={profilPersonWomen}/>
           <CollectionForWomenComponent />
           <WomenStuffComponent/>
         </div>
         <ScrollToTopButton/>
         {/* <ForWomenComponent /> */}
       </div>
-      <FooterComponent/>
-    </>
+      <div className="hidden md:flex">
+        <FooterComponent />
+      </div>    </>
   );
 }

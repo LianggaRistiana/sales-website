@@ -6,9 +6,9 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import CollectionComponent from "../UtilComponent/CollectionComponent";
 import SeeAllButton from "../UtilComponent/SeeAllButton";
 import { womenStuff } from "@/data-const";
+import { menStuff } from "@/data-const";
 
 function HomeStuffComponent() {
-
   return (
     <div className="">
       <div id="all-new" className=" mt-20 mb-8 bg-[#D9F0F4] py-4  w-full">
@@ -22,21 +22,35 @@ function HomeStuffComponent() {
               <Tab key="For Men" title="For Men">
                 <Card>
                   <CardBody>
-                    <AllStuffComponent gap={4} large={4} comp={1} items={womenStuff}/>
+                    <AllStuffComponent
+                      gap={4}
+                      large={4}
+                      comp={1}
+                      items={menStuff}
+                    />
                   </CardBody>
                 </Card>
               </Tab>
               <Tab key="Fow Women" title="For Women">
                 <Card>
                   <CardBody>
-                    <CollectionComponent />
+                    <AllStuffComponent
+                      gap={4}
+                      large={4}
+                      comp={1}
+                      items={womenStuff}
+                    />
                   </CardBody>
                 </Card>
               </Tab>
             </Tabs>
           </div>
         </div>
-        <SeeAllButton classNamed={`bg-[#000000] text-white`} yMargin={4} path={`/all-stuff`}/>
+        <SeeAllButton
+          classNamed={`bg-[#000000] text-white`}
+          yMargin={4}
+          path={`/all-stuff`}
+        />
       </div>
     </div>
   );

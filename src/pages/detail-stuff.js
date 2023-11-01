@@ -20,10 +20,12 @@ export default function Home() {
           <StuffMainDescComponent />
         </div>
         <StuffSecDescComponent />
-        <AnotherStuffComponent/>
+        <AnotherStuffComponent />
       </div>
-      <FooterComponent/>
-      <ScrollToTopButton/>
+      <div className="hidden md:flex">
+        <FooterComponent />
+      </div>
+      <ScrollToTopButton />
     </>
   );
 }

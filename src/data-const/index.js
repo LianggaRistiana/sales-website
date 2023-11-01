@@ -2,7 +2,7 @@ export const navbarItems = [
   { id: 1, title: "Home", path: "/" },
   { id: 2, title: "For Men", path: "/for-men" },
   { id: 3, title: "For Women", path: "/for-women" },
-  { id: 4, title: "About Us", path: "/about-us" },
+  // { id: 4, title: "About Us", path: "/about-us" },
 ];
 export const profilPerson = [
   { id: 1, title: "Jessica", path: "../images/profil-person/profil1.svg" },
@@ -11,6 +11,22 @@ export const profilPerson = [
   { id: 4, title: "Michael", path: "../images/profil-person/profil4.svg" },
   { id: 5, title: "Humble God", path: "../images/profil-person/profil5.svg" },
   { id: 6, title: "Lnino", path: "../images/profil-person/profil6.svg" },
+];
+export const profilPersonWomen = [
+  { id: 1, title: "Jessica", path: "../images/profil-person/profil1.svg" },
+  { id: 2, title: "Vonzy", path: "../images/profil-person/profil2.svg" },
+  { id: 3, title: "Saputri", path: "../images/profil-person/profil3.svg" },
+  { id: 4, title: "Pyticantropus", path: "../images/profil-person/profil3.svg" },
+  { id: 5, title: "Humble God", path: "../images/profil-person/profil5.svg" },
+  { id: 6, title: "Lnino", path: "../images/profil-person/profil6.svg" },
+];
+export const profilPersonMen = [
+  { id: 1,  title: "Kairi", path: "../images/profil-person/profil4.svg" },
+  { id: 2,  title: "Clover winata", path: "../images/profil-person/profil4.svg" },
+  { id: 3,  title: "Sanz", path: "../images/profil-person/profil4.svg"},
+  { id: 4, title: "Michael", path: "../images/profil-person/profil4.svg" },
+  { id: 5,  title: "Kiboy", path: "../images/profil-person/profil4.svg" },
+  { id: 6,  title: "Skylar", path: "../images/profil-person/profil4.svg" },
 ];
 export const stuffItem = [ 
   { id: 1, title: "Casual Shirt",price:"Rp. 899.999", path: "../images/stuff/stuff1.svg" },
@@ -37,14 +53,14 @@ export const allCollectionItem = [
 ];
 
 export const newStuff = [
-  { id: 1, title: "Casual Shirt",price:"Rp. 899.999", path: "../images/stuff/stuff1.svg" },
+  { id: 1, title: "Casual Shirt",price:"Rp. 899.999", path: "../images/men-stuff/men1.svg" },
   { id: 2, title: "Dress",price:"Rp. 799.999", path: "../images/stuff/stuff1.svg" },
-  { id: 3, title: "Jeans", price:"Rp. 999.999",path: "../images/stuff/stuff1.svg" },
+  { id: 3, title: "Jeans", price:"Rp. 999.999",path: "../images/men-stuff/men1.svg" },
   { id: 4, title: "Pattern Dress",price:"Rp. 699.999", path: "../images/stuff/stuff1.svg" },
-  { id: 5, title: "Pattern Dress",price:"Rp. 699.999", path: "../images/stuff/stuff1.svg" },
+  { id: 5, title: "Pattern Shirt",price:"Rp. 699.999", path: "../images/men-stuff/men1.svg" },
   { id: 6, title: "Pattern Dress",price:"Rp. 699.999", path: "../images/stuff/stuff1.svg" },
-  { id: 7, title: "Pattern Dress",price:"Rp. 699.999", path: "../images/stuff/stuff1.svg" },
-  { id: 8, title: "Pattern Dress",price:"Rp. 699.999", path: "../images/stuff/stuff1.svg" },
+  { id: 7, title: "Good Shirt",price:"Rp. 699.999", path: "../images/men-stuff/men1.svg" },
+  { id: 8, title: "Pattern Pants",price:"Rp. 699.999", path: "../images/stuff/stuff1.svg" },
 ];
 export const womenStuff = [
   { id: 1, title: "Casual Shirt",price:"Rp. 899.999", path: "../images/women-stuff/women1.svg" },
@@ -55,6 +71,16 @@ export const womenStuff = [
   { id: 6, title: "bad Dress",price:"Rp. 699.999", path: "../images/women-stuff/women1.svg" },
   { id: 7, title: "Good Dress",price:"Rp. 699.999", path: "../images/women-stuff/women1.svg" },
   { id: 8, title: "Humble Dress",price:"Rp. 699.999", path: "../images/women-stuff/women1.svg" },
+];
+export const menStuff = [
+  { id: 1, title: "Casual Shirt",price:"Rp. 899.999", path: "../images/men-stuff/men1.svg" },
+  { id: 2, title: "Dress",price:"Rp. 799.999", path: "../images/men-stuff/men1.svg" },
+  { id: 3, title: "Jeans", price:"Rp. 999.999",path: "../images/men-stuff/men1.svg" },
+  { id: 4, title: "Flower Dress",price:"Rp. 699.999", path: "../images/men-stuff/men1.svg" },
+  { id: 5, title: "Cardigan Dress",price:"Rp. 699.999", path: "../images/men-stuff/men1.svg" },
+  { id: 6, title: "bad Dress",price:"Rp. 699.999", path: "../images/men-stuff/men1.svg" },
+  { id: 7, title: "Good Dress",price:"Rp. 699.999", path: "../images/men-stuff/men1.svg" },
+  { id: 8, title: "Humble Dress",price:"Rp. 699.999", path: "../images/men-stuff/men1.svg" },
 ];
 
 export const oneStuff= [

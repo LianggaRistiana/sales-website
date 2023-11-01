@@ -20,7 +20,9 @@ export default function cart() {
         <Item />
         <Total />
       </div>
-      <FooterComponent />
+      <div className="hidden md:flex">
+        <FooterComponent />
+      </div>
       <ScrollToTopButton />
     </>
   );

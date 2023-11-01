@@ -10,6 +10,6 @@ export default function AnotherStuffComponent() {
         Another Product
       </h1>
       <AllStuffComponent comp={2} gap={8} large={4} items={newStuff}/>
-      <SeeAllButton classNamed={``} yMargin={4} variant={`bordered`}/>    </div>
+      <SeeAllButton classNamed={``} yMargin={4} variant={`bordered`} path={"all-stuff"}/>    </div>
   );
 }

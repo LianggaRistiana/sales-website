@@ -21,7 +21,7 @@ export default function FooterComponent() {
   return (
     <>
       <div data-aos="fade-up">
-        <div className="bg-gray-900 grid grid-cols-4 gap-0 place-items-center mt-8 mx-0">
+        <div className="bg-gray-900  grid grid-cols-4 gap-0 place-items-center mt-8 mx-0">
           <div>
             <div className="flex justify-between mx-auto px-100">
               <div

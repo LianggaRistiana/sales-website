@@ -26,13 +26,15 @@ export default function AllStuff() {
         </div>
         <div className="md:flex mt-2 md:justify-center">
           <div className="flex w-full flex-col mt-4">
-            <CollectionComponent items={allCollectionItem}/>
+            <CollectionComponent items={allCollectionItem} />
           </div>
           {/* <AllStuffComponent comp={2} gap={8} large={4} items={allStuff} /> */}
         </div>
       </div>
       <PageButton />
-      <FooterComponent/>
+      <div className="hidden md:flex">
+        <FooterComponent />
+      </div>
       <ScrollToTopButton />
     </>
   );

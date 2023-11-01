@@ -5,6 +5,7 @@ import { profilPerson } from "@/data-const";
 export default function TrendStyle(props) {
   const topMargin = props.topMargin;
   const xMargin = props.xMargin;
+  const items = props.items;
   return (
     <>
       <div className={`flex justify-between mt-${topMargin} mx-${xMargin}`}>
@@ -12,9 +13,9 @@ export default function TrendStyle(props) {
         {/* <img src="/images/profil-person/profil1.svg"></img> */}
       </div>
       <div
-        className={`flex justify-center max-w-[2000px] mx-${xMargin} gap-4 grid grid-cols-3 sm:grid-cols-6 mt-8`}
+        className={`flex justify-center max-w-[2000px] mx-${xMargin} gap-4 grid grid-cols-2  sm:grid-cols-3 md:grid-cols-6 mt-8`}
       >
-        {profilPerson.map((data) => {
+        {items.map((data) => {
           return (
             <Profil
               key={data.id}
