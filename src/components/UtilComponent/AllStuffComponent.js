@@ -10,7 +10,7 @@ export default function AllStuffComponent(props) {
     <>
       <div id="all-new" className=" w-full " >
         <div
-          className={`gap-${props.gap} grid grid-cols-${props.comp} sm:grid-cols-${props.large} mt-4`}
+          className={`gap-${props.gap} grid grid-cols-${props.comp} sm:grid-cols-4 mt-4`}
         >
           {items.map((data) => {
             // const order = 0;
