@@ -1,30 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { womenStuff } from "@/data-const";
+// import { womenStuff } from "@/data-const";
 import Link from "next/link";
 import { Card, CardBody, CardFooter } from "@nextui-org/react";
+import { womenStuff } from "@/data-const";
+import { menStuff } from "@/data-const";
 
 export default function AllStuffComponent(props) {
   const items = props.items;
+
+
   return (
     <>
-      <div id="all-new" className=" w-full " >
+      <div id="all-new" className=" w-full ">
         <div
           className={`gap-${props.gap} grid grid-cols-${props.comp} sm:grid-cols-4 mt-4`}
         >
           {items.map((data) => {
-            // const order = 0;
-            // if (data.id%4 == 0 && data.id>4) {
-            //   order 
-            // }
-
             return (
               <StuffCard
-                key={data.id}
-                src={data.path}
+                key={data.stuffID}
+                stuffKey={data.stuffID}
+                src={womenStuff[1].path}
                 price={data.price}
-                title={data.title}
-                delay={(data.id)%4*150}
+                title={data.name}
+                delay={(data.id % 4) * 150}
               />
             );
           })}
@@ -36,13 +36,11 @@ export default function AllStuffComponent(props) {
 
 function StuffCard(props) {
   return (
-    <div 
-    className="" data-aos="fade-up" data-aos-delay={`${props.delay}`}
-    >
-      <Link href={"/detail-stuff"}>
+    <div className="" data-aos="fade-up" data-aos-delay={`${props.delay}`}>
+      <Link href={`/all-stuff/${props.stuffKey}`}>
         <Card
           shadow="sm"
-          key={props.id}
+          key={props.stuffKey}
           isPressable
           fullWidth
           className="w-full h-full transition-transform duration-300 transform-gpu hover:scale-95 text-white hover:text-yellow-500"
@@ -62,7 +60,7 @@ function StuffCard(props) {
           <CardFooter className="text-small justify-center bg-[#000000] ">
             <div className="max-w-[200px] ">
               <b className="">{props.title}</b>
-              <p className="text-default-300">{props.price}</p>
+              <p className="text-default-300">Rp. {props.price}</p>
             </div>
           </CardFooter>
         </Card>

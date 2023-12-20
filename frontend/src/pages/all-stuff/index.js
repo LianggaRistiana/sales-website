@@ -15,6 +15,17 @@ import { Tab, Tabs } from "@nextui-org/react";
 import FooterComponent from "@/components/UtilComponent/FooterComponent";
 
 export default function AllStuff() {
+  const url = "http://localhost:8000/all-stuff";
+  const [stuffs, setStuffs] = useState([]);
+  const fetchInfo = () => {
+    return fetch(url)
+      .then((res) => res.json())
+      .then((data) => setStuffs(data.data));
+  };
+
+  useEffect(() => {
+    fetchInfo();
+  }, []);
   return (
     <>
       <NavbarComponent />

@@ -15,6 +15,8 @@ import ForWomenRoute from "./src/routes/ForWomenRoute.js";
 import HomeRoute from "./src/routes/HomeRoute.js";
 import Purchase from "./src/routes/PurchaseRoute.js";
 import Collection from "./src/routes/CollectionRoute.js";
+import Admin from "./src/routes/AdminRoute.js"
+import AllStuff from "./src/routes/AllStuffRoute.js"
 
 const app = express();
 const port = 8000;
@@ -49,5 +51,7 @@ app.use("/detail-stuff", DetailStuffRoute);
 app.use("/Collection", Collection);
 app.use("/cart", CartRoute);
 app.use("/purhase", Purchase);
+app.use("/all-stuff", AllStuff);
+app.use("/admin", Admin);
 
 export default app;

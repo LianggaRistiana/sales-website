@@ -1,5 +1,6 @@
-import sequelize from "../config/database";
+import sequelize from "../config/database.js";
 import { DataTypes, Model } from "sequelize";
+import DetailTransaction from "./DetailTransaction.js"
 
 const Transaction = sequelize.define(
   "transaction",
@@ -23,6 +24,9 @@ const Transaction = sequelize.define(
   },
   { tableName: "transaction" }
 );
+
+Transaction.hasMany(DetailTransaction);
+DetailTransaction.belongsTo(Transaction);
 
 
 export default Transaction;

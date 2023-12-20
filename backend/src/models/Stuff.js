@@ -1,5 +1,7 @@
 import sequelize from "../config/database.js";
 import { DataTypes } from "sequelize";
+import DetailTransaction from "./DetailTransaction.js";
+import Cart from "./Cart.js";
 
 const Stuff = sequelize.define(
   "stuff",
@@ -36,6 +38,12 @@ const Stuff = sequelize.define(
     tableName: "stuff",
   }
 );
+
+Stuff.hasMany(DetailTransaction);
+DetailTransaction.belongsTo(Stuff);
+
+Stuff.hasMany(Cart);
+Cart.belongsTo(Stuff);
 
 
 export default Stuff;

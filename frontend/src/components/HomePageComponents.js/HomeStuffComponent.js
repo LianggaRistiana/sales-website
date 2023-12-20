@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AllStuffComponent from "../UtilComponent/AllStuffComponent";
 import { Button, Tabs, Tab, Card, CardBody } from "@nextui-org/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,6 +9,17 @@ import { womenStuff } from "@/data-const";
 import { menStuff } from "@/data-const";
 
 function HomeStuffComponent() {
+  const url = "http://localhost:8000/all-stuff";
+  const [stuffs, setStuffs] = useState([]);
+  const fetchInfo = () => {
+    return fetch(url)
+      .then((res) => res.json())
+      .then((data) => setStuffs(data.data));
+  };
+
+  useEffect(() => {
+    fetchInfo();
+  }, []);
   return (
     <div className="">
       <div id="all-new" className=" mt-20 mb-8 bg-[#D9F0F4] py-4  w-full">
@@ -26,7 +37,7 @@ function HomeStuffComponent() {
                       gap={4}
                       large={4}
                       comp={1}
-                      items={menStuff}
+                      items={stuffs}
                     />
                   </CardBody>
                 </Card>
@@ -38,7 +49,7 @@ function HomeStuffComponent() {
                       gap={4}
                       large={4}
                       comp={1}
-                      items={womenStuff}
+                      items={stuffs}
                     />
                   </CardBody>
                 </Card>

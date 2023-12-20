@@ -12,17 +12,18 @@ import {
   Link,
 } from "@nextui-org/react";
 
-export default function StuffMainDescComponent() {
+export default function StuffMainDescComponent(props) {
+  const items = props.items;
   return (
     <div className="mb-8">
       <div>
         <h1 className="font-bold text-[24px] mt-4 lg:mt-0">
-          Long straight fit jeans in white
+          {items.name}
         </h1>
         <h1 className="font-bold text-[24px] mb-8 text-yellow-500">
-          Rp. 899.000
+          Rp. {items.price}
         </h1>
-        <Size />
+        <Size items ={items}/>
       </div>
       <div
         className="lg:flex text-center lg:justify-between mt-8"
@@ -70,7 +71,8 @@ function BuyButton() {
     </div>
   );
 }
-function Size() {
+function Size(props) {
+  const items = props.items;
   return (
     <div
       className="flex flex-col w-[230px]"
@@ -80,27 +82,27 @@ function Size() {
       <Tabs variant="solid" aria-label="Options">
         <Tab key="XS" title="XS">
           <Card>
-            <CardBody>100 left</CardBody>
+            <CardBody>{items.stock}</CardBody>
           </Card>
         </Tab>
         <Tab key="S" title="S">
           <Card>
-            <CardBody>168 left</CardBody>
+            <CardBody>{items.stock}</CardBody>
           </Card>
         </Tab>
         <Tab key="M" title="M">
           <Card>
-            <CardBody>100 left</CardBody>
+            <CardBody>{items.stock}</CardBody>
           </Card>
         </Tab>
         <Tab key="L" title="L">
           <Card>
-            <CardBody>121 left</CardBody>
+            <CardBody>{items.stock}</CardBody>
           </Card>
         </Tab>
         <Tab key="XL" title="XL">
           <Card>
-            <CardBody>10 left</CardBody>
+            <CardBody>{items.stock}</CardBody>
           </Card>
         </Tab>
       </Tabs>
