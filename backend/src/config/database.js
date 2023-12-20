@@ -1,13 +1,9 @@
-const Pool = require('pg').Pool;
+import { Sequelize } from "sequelize";
+import { env } from "./var-env.js";
 
-const pool = new Pool(
-    {
-        user: "devtadanarsa",
-        host: "localhost",
-        database: "dacourse",
-        password: "test",
-        port: 5432
-    }
-)
+const sequelize = new Sequelize('db_sales_website', 'postgres', env.PASS_DB, {
+    host: 'localhost',
+    dialect:'postgres',
+});
 
-module.exports = pool;
+export default sequelize;
