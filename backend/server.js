@@ -48,7 +48,7 @@ app.use("/", HomeRoute);
 app.use("/for-men", ForMenRoute);
 app.use("/for-women", ForWomenRoute);
 app.use("/detail-stuff", DetailStuffRoute);
-app.use("/Collection", Collection);
+app.use("/all-collection", Collection);
 app.use("/cart", CartRoute);
 app.use("/purhase", Purchase);
 app.use("/all-stuff", AllStuff);

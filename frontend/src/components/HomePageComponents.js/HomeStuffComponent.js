@@ -9,16 +9,28 @@ import { womenStuff } from "@/data-const";
 import { menStuff } from "@/data-const";
 
 function HomeStuffComponent() {
-  const url = "http://localhost:8000/all-stuff";
-  const [stuffs, setStuffs] = useState([]);
+  const url = "http://localhost:8000/for-men/stuff";
+  const [menStuffs, setMenStuff] = useState([]);
   const fetchInfo = () => {
     return fetch(url)
       .then((res) => res.json())
-      .then((data) => setStuffs(data.data));
+      .then((data) => setMenStuff(data.data));
   };
 
   useEffect(() => {
     fetchInfo();
+  }, []);
+
+  const url2 = "http://localhost:8000/for-women/stuff";
+  const [womenStuffs, setWomenStuff] = useState([]);
+  const fetchInfo2= () => {
+    return fetch(url2)
+      .then((res) => res.json())
+      .then((data) => setWomenStuff(data.data));
+  };
+
+  useEffect(() => {
+    fetchInfo2();
   }, []);
   return (
     <div className="">
@@ -37,7 +49,8 @@ function HomeStuffComponent() {
                       gap={4}
                       large={4}
                       comp={1}
-                      items={stuffs}
+                      items={menStuffs}
+                      imagesD={menStuff[0].path}
                     />
                   </CardBody>
                 </Card>
@@ -49,7 +62,8 @@ function HomeStuffComponent() {
                       gap={4}
                       large={4}
                       comp={1}
-                      items={stuffs}
+                      items={womenStuffs}
+                      imagesD={womenStuff[0].path}
                     />
                   </CardBody>
                 </Card>

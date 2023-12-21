@@ -14,16 +14,53 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Home() {
   const router = useRouter();
   const [stuffID, setStuffId] = useState(null);
-
-    useEffect(() => {
-        if (router.query.id) {
-            setStuffId(router.query.id);
-        }
-    }, [router.query.id]);
-
-  const url = `http://localhost:8000/all-stuff/${stuffID}`;
-  
   const [stuffs, setStuffs] = useState([]);
+
+  useEffect(() => {
+    if (router.query.id) {
+      setStuffId(router.query.id);
+    }
+  }, [router.query.id]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (stuffID) {
+        try {
+          const url = `http://localhost:8000/all-stuff/${stuffID}`;
+          const response = await fetch(url);
+          
+          if (!response.ok) {
+            throw new Error('Network response was not ok.');
+          }
+
+          const data = await response.json();
+          setStuffs(data.data);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+          // Handle error state here
+        }
+      }
+    };
+
+    fetchData();
+  }, [stuffID]);
+
+
+
+
+
+  // const router = useRouter();
+  // const [stuffID, setStuffId] = useState(null);
+
+  //   useEffect(() => {
+  //       if (router.query.id) {
+  //           setStuffId(router.query.id);
+  //       }
+  //   }, [router.query.id]);
+
+  // const url = `http://localhost:8000/all-stuff/${stuffID}`;
+  // const [stuffs, setStuffs] = useState([]);
+// /////////////////////////////////
   // const fetchInfo = async () => {
   //   if(stuffID){
   //     return await fetch(url)
@@ -47,7 +84,7 @@ export default function Home() {
       }
     }
   };
-  
+  // //////////////////////////////////
   // const fetchInfo = async () => {
   //   if (stuffID) {
   //     try {

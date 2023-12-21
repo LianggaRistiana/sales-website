@@ -21,7 +21,7 @@ export default function AllStuffComponent(props) {
               <StuffCard
                 key={data.stuffID}
                 stuffKey={data.stuffID}
-                src={womenStuff[1].path}
+                src={props.imagesD}
                 price={data.price}
                 title={data.name}
                 delay={(data.id % 4) * 150}

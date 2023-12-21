@@ -22,11 +22,11 @@ export default function CollectionComponent(props) {
           {items.map((data) => {
             return (
               <>
-                <Link href={"/all-stuff"}>
+                <Link href={`/all-collection/${data.collectionID}`}>
                   <CardCollections
                     key={data.id}
-                    src={data.path}
-                    title={data.title}
+                    src={props.imagesD}
+                    title={data.name}
                     delay={(data.id % 3) * 150}
                   />
                 </Link>

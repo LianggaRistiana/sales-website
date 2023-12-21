@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 // import {Pagination} from "@nextui-org/react";
 // import { Button } from "@nextui-org/react";
 import {
@@ -14,6 +14,16 @@ import AllStuffComponent from "../UtilComponent/AllStuffComponent";
 import { collectionItem, womenStuff, newStuff } from "@/data-const";
 
 export default function WomenStuffComponent() {
+  const url2 = "http://localhost:8000/for-women/stuff";
+  const [womenStuffs, setWomenStuff] = useState([]);
+  const fetchInfo2= () => {
+    return fetch(url2)
+      .then((res) => res.json())
+      .then((data) => setWomenStuff(data.data));
+  };
+  useEffect(() => {
+    fetchInfo2();
+  }, []);
   return (
     <>
       <div className="mt-12">
@@ -22,22 +32,22 @@ export default function WomenStuffComponent() {
           <div className="flex justify-between">
             <div className="flex justify-center">
               {/* <h2 className="mx-2 mt-2 text-[16px]">Type</h2> */}
-              <DropdownButtonType />
+              {/* <DropdownButtonType /> */}
             </div>
             <div className="flex ml-8 justify-center">
               {/* <h2 className="mr-2 ml-8 mt-2  text-[16px]">Size</h2> */}
-              <DropdownButtonSize />
+              {/* <DropdownButtonSize /> */}
             </div>
           </div>
 
           <div className="flex justify-center">
             {/* <h2 className="mx-2 mt-2  text-[16px]">Sort By</h2> */}
-            <DropdownButtonSort />
+            {/* <DropdownButtonSort /> */}
           </div>
         </div>
-        <AllStuffComponent gap={4} large={4} comp={2} items={newStuff} />
+        <AllStuffComponent gap={4} large={4} comp={2} items={womenStuffs} imagesD={womenStuff[0].path}/>
       </div>
-      <PageButton />
+      {/* <PageButton /> */}
     </>
   );
 }

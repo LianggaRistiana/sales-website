@@ -1,12 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Divider, Button, ButtonGroup } from "@nextui-org/react";
 import Image from "next/image";
 import { oneStuff } from "@/data-const";
-import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
-export default function Item() {
+export default function Item(props) {
+  const data = props.data;
+  const price = data.stuff.price;
+  const category = data.stuff.category;
+  const name = data.stuff.name;
+
+  const handleDeleteChapter = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:8000/cart/${data.cartID}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.ok) {
+        alert("Chapter deleted successfully");
+        window.location.reload();
+
+      } else {
+        const errorMessage = await response.text();
+        alert(`Error : ${errorMessage}`);
+      }
+    } catch (error) {
+      console.error(`Error : ${error}`);
+      alert("An error occured while deleting the chapter");
+    }
+  };
   return (
     <>
       <div data-aos="fade-up" data-delay="500">
@@ -22,25 +50,24 @@ export default function Item() {
               src={oneStuff[0].path}
             />
             <div className="ml-4">
-              <h1 className="font-bold text-[12px] max-w-[150px]">
-                Long straight fit jeans in white
-              </h1>
+              <h1 className="font-bold text-[24px] max-w-[200px]">{name}</h1>
 
               <h1 className="font-bold text-[12px] mt-4 max-w-[150px]">
-                Size : <span className="font-normal"> L</span>
+                Size : <span className="font-normal"> {data.size}</span>
               </h1>
               <h1 className="font-bold text-[12px] mt-2  max-w-[150px]">
-                Category : <span className="font-normal"> Women</span>
+                Category : <span className="font-normal"> {category}</span>
               </h1>
               <h1 className="font-bold text-[12px] mt-2 max-w-[150px]">
-                Quantity : <span className="font-normal"> 2 </span>
+                Quantity : <span className="font-normal"> {data.acount} </span>
               </h1>
-              <BuyButton />
+              {/* <BuyButton /> */}
             </div>
           </div>
           <div className="text-right">
-            <h1 className="font-bold text-[18px] ml-4">{oneStuff[0].price}</h1>
+            <h1 className="font-bold text-[18px] ml-4">Rp. {price}</h1>
             <Button
+              onClick={handleDeleteChapter}
               isIconOnly
               className="mt-[100px] transition-transform duration-300 transform-gpu bg-[#ffffff] text-red-500 hover:bg-[#ef4444] hover:text-white hover:scale-110"
             >

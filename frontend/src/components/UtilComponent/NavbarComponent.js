@@ -82,13 +82,13 @@ export default function NavbarComponent() {
 
       <NavbarContent justify="end">
         <NavbarItem className=" font-semibold ">
-          <Button
+          {/* <Button
             onPress={onOpen}
             className="text-black transition-transform duration-300 transform-gpu hover:bg-[#000000] hover:text-yellow-500 hover:scale-90"
             variant="bordered"
           >
             <FontAwesomeIcon icon={faUser} />
-          </Button>
+          </Button> */}
           <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
             <ModalContent>
               {(onClose) => (

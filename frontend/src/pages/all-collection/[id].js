@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import NavbarComponent from "@/components/UtilComponent/NavbarComponent";
 import AllStuffComponent from "@/components/UtilComponent/AllStuffComponent";
 import ScrollToTopButton from "@/components/UtilComponent/ScrollTop";
-import { allStuff, menStuff } from "@/data-const";
+import { useRouter } from "next/router";
+import { menStuff } from "@/data-const";
+import { allStuff } from "@/data-const";
+
+
 import {
   Dropdown,
   DropdownTrigger,
@@ -15,35 +19,89 @@ import { Tab, Tabs } from "@nextui-org/react";
 import FooterComponent from "@/components/UtilComponent/FooterComponent";
 
 export default function AllStuff() {
-  const url = "http://localhost:8000/for-men/stuff";
-  const [menStuffs, setMenStuff] = useState([]);
-  const fetchInfo = () => {
-    return fetch(url)
-      .then((res) => res.json())
-      .then((data) => setMenStuff(data.data));
-  };
+  const router = useRouter();
+  const [collID, setCollId] = useState(null);
+  const [colls, setColls] = useState([]);
 
   useEffect(() => {
-    fetchInfo();
-  }, []);
-
-  const url2 = "http://localhost:8000/for-women/stuff";
-  const [womenStuffs, setWomenStuff] = useState([]);
-  const fetchInfo2= () => {
-    return fetch(url2)
-      .then((res) => res.json())
-      .then((data) => setWomenStuff(data.data));
-  };
+    if (router.query.id) {
+      setCollId(router.query.id);
+    }
+  }, [router.query.id]);
 
   useEffect(() => {
-    fetchInfo2();
-  }, []);
+    const fetchData = async () => {
+      if (collID) {
+        try {
+          const url = `http://localhost:8000/all-collection/${collID}`;
+          const response = await fetch(url);
+          
+          if (!response.ok) {
+            throw new Error('Network response was not ok.');
+          }
+
+          const data = await response.json();
+          setColls(data.data);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+          // Handle error state here
+        }
+      }
+    };
+
+    fetchData();
+  }, [collID]);
+
+
+
+
+  // const router = useRouter();
+  // const [collID, setCollId] = useState(null);
+
+  //   useEffect(() => {
+  //       if (router.query.id) {
+  //           setCollId(router.query.id);
+  //       }
+  //   }, [router.query.id]);
+
+  // const url = `http://localhost:8000/all-collection/${collID}`;
+  // const [coll, setColl] = useState([]);
+
+  // const fetchInfo = async () => {
+  //   if(coll){
+  //     return await fetch(url)
+  //     .then((res) => res.json())
+  //     .then((data) => setColl(data.data));
+  //   }
+  // };
+
+
+
+  // const fetchInfo = async () => {
+  //   if (coll) {
+  //     try {
+  //       const response = await fetch(url);
+  //       if (!response.ok) {
+  //         throw new Error('Network response was not ok.');
+  //       }
+  //       const data = await response.json();
+  //       setStuffs(data.data);
+  //     } catch (error) {
+  //       console.error('Error fetching data:', error);
+  //       // Handle error state here
+  //     }
+  //   }
+  // };
+
+  //   useEffect(() => {
+  //   fetchInfo();
+  // }, []);
   return (
     <>
       <NavbarComponent />
       <div className="md:mx-48 mx-4">
         <div className="flex justify-center py-12 bg-[#000000]">
-          <h1 className="font-bold text-[36px] text-white">ALL STUFF</h1>
+          <h1 className="font-bold text-[36px] text-white">COLLECTION</h1>
         </div>
         <div className="flex justify-between mt-4">
           <div className="flex justify-between">
@@ -65,22 +123,13 @@ export default function AllStuff() {
         <div className="md:flex mt-2 md:justify-center">
           <div className="flex w-full flex-col mt-4">
             <Tabs aria-label="Options" variant="underlined">
-              <Tab key="For Men" title="For Men">
+              <Tab key="All" title="All">
                 <AllStuffComponent
                   comp={1}
                   gap={8}
                   large={4}
-                  items={menStuffs}
+                  items={colls}
                   imagesD={menStuff[0].path}
-                />
-              </Tab>
-              <Tab key="For Women" title="For Women">
-                <AllStuffComponent
-                  comp={1}
-                  gap={8}
-                  large={4}
-                  items={womenStuffs}
-                  imagesD = {allStuff[0].path}
                 />
               </Tab>
             </Tabs>

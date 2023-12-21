@@ -16,6 +16,42 @@ export const getStuff = async (req, res) => {
   }
 };
 
+export const getMenStuff = async (req,res) => {
+  try {
+    const stuffs = await Stuff.findAll({
+      where:{
+        category:"Men"
+      }
+    });
+    return res.status(200).json({
+      success: true,
+      message: "Success to Fetch all stuff data",
+      data: stuffs,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ success: false, message: `${error}` });
+  }
+};
+export const getWomenStuff = async (req,res) => {
+  try {
+    const stuffs = await Stuff.findAll({
+      where:{
+        category:"Women"
+      }
+    });
+    return res.status(200).json({
+      success: true,
+      message: "Success to Fetch all stuff data",
+      data: stuffs,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ success: false, message: `${error}` });
+  }
+};
+
+
 // Getting stuff spesific by id
 export const getStuffById = async (req, res) => {
   try {

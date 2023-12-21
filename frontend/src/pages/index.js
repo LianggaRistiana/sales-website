@@ -26,7 +26,7 @@ export default function Home() {
       <div className="px-24"></div>
       <HeroComponent />
       <TrendStyle topMargin={20} xMargin={24} items={profilPerson} />
-      <BestSellersComponent />
+      {/* <BestSellersComponent /> */}
       {/* <NewCollectionComponent /> */}
       {/* <CollectionComponent margin={6}/> */}
       <HomeCollectionComponent />
