@@ -4,6 +4,12 @@ export const navbarItems = [
   { id: 3, title: "For Women", path: "/for-women" },
   // { id: 4, title: "About Us", path: "/about-us" },
 ];
+export const navbarAdminItems = [
+  { id: 1, title: "Transaction", path: "/admin/transaction" },
+  { id: 2, title: "User", path: "/admin/user" },
+  { id: 3, title: "Collection", path: "/admin/collection" },
+  { id: 4, title: "Stuff", path: "/admin/stuff" },
+];
 export const profilPerson = [
   { id: 1, title: "Jessica", path: "../images/profil-person/profil1.svg" },
   { id: 2, title: "Vonzy", path: "../images/profil-person/profil2.svg" },

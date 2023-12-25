@@ -1,10 +1,16 @@
 import { Op } from "sequelize";
 import Stuff from "../models/Stuff.js";
+import Collection from "../models/Collection.js";
 
 // Getting all stuff
 export const getStuff = async (req, res) => {
   try {
-    const stuffs = await Stuff.findAll();
+    const stuffs = await Stuff.findAll({
+      include: [{
+          model: Collection,
+          attributes: ['name'] // Attribut dari tabel Category yang ingin Anda ambil
+        }]
+  });
     return res.status(200).json({
       success: true,
       message: "Success to Fetch all stuff data",
@@ -20,7 +26,7 @@ export const getMenStuff = async (req,res) => {
   try {
     const stuffs = await Stuff.findAll({
       where:{
-        category:"Men"
+        [Op.or]: [{category: "Men"}, {category: "All"}]
       }
     });
     return res.status(200).json({
@@ -37,7 +43,7 @@ export const getWomenStuff = async (req,res) => {
   try {
     const stuffs = await Stuff.findAll({
       where:{
-        category:"Women"
+        [Op.or]: [{category: "Women"}, {category: "All"}]
       }
     });
     return res.status(200).json({

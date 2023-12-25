@@ -23,7 +23,6 @@ export default function Item(props) {
         }
       );
       if (response.ok) {
-        alert("Chapter deleted successfully");
         window.location.reload();
 
       } else {

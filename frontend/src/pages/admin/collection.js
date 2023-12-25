@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-
-import { RadioGroup, Radio, cn } from "@nextui-org/react";
+import NavbarAdmin from "./NavbarAdmin";
+import CollectionTable from "./adminTable/CollectionTable";
 import {
   Modal,
   ModalContent,
@@ -9,79 +9,70 @@ import {
   ModalFooter,
   Button,
   useDisclosure,
+  RadioGroup,
+  Radio,
   Checkbox,
   Input,
   Link,
 } from "@nextui-org/react";
-import NavbarComponent from "./NavbarComponent";
-import TableCollection from "./table/tableCollection";
-// import {MailIcon} from './MailIcon.jsx';
-// import {LockIcon} from './LockIcon.jsx';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 
-export default function App() {
-  const {isOpen, onOpen, onOpenChange} = useDisclosure();
-  const url = "http://localhost:8000/admin/collection";
-  const [collections, setStuffs] = useState([]);
-  const fetchInfo = () => {
-    return fetch(url)
-      .then((res) => res.json())
-      .then((data) => setStuffs(data.data));
+function Home() {
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const [selectedCollection, setselectedCollection] = useState("");
+
+  const [posts, setPosts] = useState([]);
+  const endPoint = "http://localhost:8000/admin/collection/";
+
+  const fetchPosts = async () => {
+    const { data: res } = await axios.get(endPoint);
+    setPosts(res.data);
   };
 
   useEffect(() => {
-    fetchInfo();
+    fetchPosts();
   }, []);
 
-  const [userData, setUSerData] = useState({
+  const [data, setData] = useState({
     name: "",
-    email: "",
-    address: "",
-    password: "",
+    category: "All",
   });
-
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setUSerData((prevData) => ({ ...prevData, [name]: value }));
+    setData((prevData) => ({ ...prevData, [name]: value }));
   };
-  const [selectedCollection, setselectedCollection] = useState("");
-  const handleAddCollection = async (onClose) => {
-    try {
-      const response = await fetch("http://localhost:8000/admin/collection", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: userData.name,
-          category: selectedCollection,
-        }),
-      });
+  const postHandler = async (onClose) => {
+    await axios.post(endPoint, data);
+    onClose();
 
-      if (response.ok) {
-        alert("Course added successfully");
-        onClose();
-        window.location.reload();
-      } else {
-        const errorMessage = await response.text();
-        alert(`Error : ${errorMessage}`);
-      }
-    } catch (error) {
-      console.error(`Error : ${error}`);
-      alert(`Error : ${error}`);
-    }
+    fetchPosts();
   };
 
   return (
-    <>
-      <NavbarComponent />
-      <Button onPress={onOpen} color="primary">
-        Add Collection
-      </Button>
+    <div className="bg-slate-100">
+      <NavbarAdmin></NavbarAdmin>
+
+      <div className="mx-4 lg:mx-24 mt-8">
+        <Button
+          onPress={onOpen}
+          className="mb-4 bg-neutral-950 text-white transition-transform duration-300 transform-gpu hover:scale-110"
+        >
+          <FontAwesomeIcon icon={faPlus} />
+          Add Data
+        </Button>
+        <CollectionTable 
+          data={posts} 
+          fetchPosts={fetchPosts}
+          endPoint={endPoint}></CollectionTable>
+      </div>
+
       <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="top-center">
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">
+              <ModalHeader className="flex flex-col gap-1 ">
                 Add Collection
               </ModalHeader>
               <ModalBody>
@@ -91,15 +82,26 @@ export default function App() {
                   placeholder="Enter the collection name"
                   variant="bordered"
                   name="name"
+                  isRequired
                   onChange={handleChange}
+                />
+                <Input
+                  autoFocus
+                  label="Describe"
+                  placeholder="Enter  describtion"
+                  variant="bordered"
+                  name="desc"
+                  isRequired
+                  type="text"
                 />
                 <RadioGroup
                   id="size"
                   label="Category"
-                  orientation="vertical"
+                  orientation="horizontal"
                   color="default"
-                  value={selectedCollection} // Set the value prop to the state variable
-                  onChange={(e) => setselectedCollection(e.target.value)} // Update the state on change
+                  onChange={handleChange}
+                  name="category"
+                  value={data.category}
                 >
                   <Radio value="All">All</Radio>
                   <Radio value="Men">Men</Radio>
@@ -107,10 +109,10 @@ export default function App() {
                 </RadioGroup>
               </ModalBody>
               <ModalFooter>
-                <Button color="danger" variant="flat" onPress={onClose}>
+                <Button color="default" variant="light" onPress={onClose}>
                   Close
                 </Button>
-                <Button color="primary" onPress={() => handleAddCollection(onClose)}>
+                <Button color="default" onPress={() => postHandler(onClose)}>
                   Submit
                 </Button>
               </ModalFooter>
@@ -118,7 +120,8 @@ export default function App() {
           )}
         </ModalContent>
       </Modal>
-      <TableCollection data={collections}/>
-    </>
+    </div>
   );
 }
+
+export default Home;

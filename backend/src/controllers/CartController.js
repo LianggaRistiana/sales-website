@@ -54,7 +54,7 @@ export const removeCart = async (req, res) => {
     });
     return res.status(200).json({
       success: true,
-      message: "Success to add",
+      message: "Success to delete",
     });
   } catch (error) {
     console.error(error);

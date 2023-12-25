@@ -38,8 +38,8 @@ export const getMenCollection = async (req, res) => {
   try {
     const collections = await Collection.findAll({
       where: {
-        category: "Men",
-      },
+        [Op.or]: [{category: "Men"}, {category: "All"}]
+      }
     });
     return res.status(200).json({
       success: true,
@@ -55,7 +55,7 @@ export const getWomenCollection = async (req, res) => {
   try {
     const collections = await Collection.findAll({
       where: {
-        category: "Women",
+        [Op.or]: [{category: "Women"}, {category: "All"}]
       },
     });
     return res.status(200).json({

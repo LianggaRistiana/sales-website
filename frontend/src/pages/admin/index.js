@@ -17,7 +17,7 @@ export default function App() {
 
   // Redirect to a different page upon successful login
   if (authenticated) {
-    router.push("admin/NavbarComponent"); // Replace "/dashboard" with the actual path of your desired page
+    router.push("admin/stuff"); // Replace "/dashboard" with the actual path of your desired page
     return null; // Return null to prevent rendering the login form after successful login
   }
 

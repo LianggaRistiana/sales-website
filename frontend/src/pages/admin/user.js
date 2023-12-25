@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-
-import { RadioGroup, Radio, cn } from "@nextui-org/react";
+import NavbarAdmin from "./NavbarAdmin";
+import UserTable from "./adminTable/UserTable";
 import {
   Modal,
   ModalContent,
@@ -9,134 +9,144 @@ import {
   ModalFooter,
   Button,
   useDisclosure,
+  RadioGroup,
+  Radio,
   Checkbox,
   Input,
   Link,
 } from "@nextui-org/react";
-import NavbarComponent from "./NavbarComponent";
-import TableUser from "./table/tableuser";
-// import {MailIcon} from './MailIcon.jsx';
-// import {LockIcon} from './LockIcon.jsx';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 
-export default function App() {
+function Home() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const url = "http://localhost:8000/admin/user";
-  const [users, setStuffs] = useState([]);
-  const fetchInfo = () => {
-    return fetch(url)
-      .then((res) => res.json())
-      .then((data) => setStuffs(data.data));
+  const [selecteduser, setselecteduser] = useState("");
+
+  const [posts, setPosts] = useState([]);
+  const endPoint = "http://localhost:8000/admin/user/";
+
+  const fetchPosts = async () => {
+    const { data: res } = await axios.get(endPoint);
+    setPosts(res.data);
   };
 
   useEffect(() => {
-    fetchInfo();
+    fetchPosts();
   }, []);
 
-  const [userData, setUSerData] = useState({
+  const [data, setData] = useState({
     name: "",
     email: "",
     address: "",
     password: "",
+    role: "Client",
   });
-
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setUSerData((prevData) => ({ ...prevData, [name]: value }));
+    setData((prevData) => ({ ...prevData, [name]: value }));
   };
-  const [selectedUser, setselectedUser] = useState("");
-  const handleAddUser = async (onClose) => {
-    try {
-      const response = await fetch("http://localhost:8000/admin/user", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: userData.name,
-          email: userData.email,
-          address: userData.address,
-          password: userData.password,
-          role: selectedUser,
-        }),
-      });
+  const postHandler = async (onClose) => {
+    await axios.post(endPoint, data);
+    onClose();
 
-      if (response.ok) {
-        alert("Course added successfully");
-        onClose();
-        window.location.reload();
-      } else {
-        const errorMessage = await response.text();
-        alert(`Error : ${errorMessage}`);
-      }
-    } catch (error) {
-      console.error(`Error : ${error}`);
-      alert("An error occurred while adding course");
-    }
+    fetchPosts();
   };
+
+
+  const validateEmail = (value) =>
+    value.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i);
+
+  const isInvalid = React.useMemo(() => {
+    if (data.email === "") return false;
+    return validateEmail(data.email) ? false : true;
+  }, [data.email]);
 
   return (
-    <>
-      <NavbarComponent />
-      <Button onPress={onOpen} color="primary">
-        Add User
-      </Button>
+    <div className="bg-slate-100">
+      <NavbarAdmin></NavbarAdmin>
+
+      <div className="mx-4 lg:mx-24 mt-8">
+        <Button
+          onPress={onOpen}
+          className="mb-4 bg-neutral-950 text-white transition-transform duration-300 transform-gpu hover:scale-110"
+        >
+          <FontAwesomeIcon icon={faPlus} />
+          Add Data
+        </Button>
+        <UserTable
+          data={posts}
+          fetchPosts={fetchPosts}
+          endPoint={endPoint}
+        ></UserTable>
+      </div>
+
       <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="top-center">
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">
-                Add User
+              <ModalHeader className="flex flex-col gap-1 ">
+                Add user
               </ModalHeader>
               <ModalBody>
                 <Input
                   autoFocus
-                  label="User Name"
-                  placeholder="Enter the user name"
+                  label="Name"
+                  placeholder="Enter the name"
                   variant="bordered"
                   name="name"
+                  isRequired
                   onChange={handleChange}
                 />
                 <Input
+                  autoFocus
                   label="Email"
-                  placeholder="Enter the user email"
-                  type="email"
+                  placeholder="Enter the email"
                   variant="bordered"
                   name="email"
+                  isRequired
+                  type="email"
                   onChange={handleChange}
+                  isInvalid={isInvalid}
+                  errorMessage={isInvalid && "Input a valid email!"}
                 />
                 <Input
-                  label="Password"
-                  placeholder="Enter user password"
-                  type="password"
-                  variant="bordered"
-                  name="password"
-                  onChange={handleChange}
-                />
-                <Input
+                  autoFocus
                   label="Address"
-                  placeholder="Enter the user address"
-                  type="address"
+                  placeholder="Enter the address"
                   variant="bordered"
                   name="address"
+                  isRequired
+                  type="text"
+                  onChange={handleChange}
+                />
+                <Input
+                  autoFocus
+                  isRequired
+                  label="Password"
+                  placeholder="Enter the Password"
+                  variant="bordered"
+                  name="password"
+                  type="text"
                   onChange={handleChange}
                 />
                 <RadioGroup
-                  id="size"
-                  label="Role"
-                  orientation="vertical"
+                  label="Category"
+                  orientation="horizontal"
                   color="default"
-                  value={selectedUser} // Set the value prop to the state variable
-                  onChange={(e) => setselectedUser(e.target.value)} // Update the state on change
+                  onChange={handleChange}
+                  name="role"
+                  value={data.role}
                 >
                   <Radio value="Admin">Admin</Radio>
                   <Radio value="Client">Client</Radio>
                 </RadioGroup>
               </ModalBody>
               <ModalFooter>
-                <Button color="danger" variant="flat" onPress={onClose}>
+                <Button color="default" variant="light" onPress={onClose}>
                   Close
                 </Button>
-                <Button color="primary" onPress={() => handleAddUser(onClose)}>
+                <Button color="default" onPress={() => postHandler(onClose)}>
                   Submit
                 </Button>
               </ModalFooter>
@@ -144,7 +154,8 @@ export default function App() {
           )}
         </ModalContent>
       </Modal>
-      <TableUser data={users} />
-    </>
+    </div>
   );
 }
+
+export default Home;

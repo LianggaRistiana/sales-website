@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-
-import { RadioGroup, Radio, cn } from "@nextui-org/react";
+import NavbarAdmin from "./NavbarAdmin";
+import StuffTable from "./adminTable/StuffTable";
 import {
   Modal,
   ModalContent,
@@ -9,140 +9,164 @@ import {
   ModalFooter,
   Button,
   useDisclosure,
-  Checkbox,
+  RadioGroup,
+  Radio,
+  Select,
+  SelectItem,
   Input,
-  Link,
 } from "@nextui-org/react";
-import NavbarComponent from "./NavbarComponent";
-import TableStuff from "./table/tableStuffComponent";
-// import {MailIcon} from './MailIcon.jsx';
-// import {LockIcon} from './LockIcon.jsx';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 
-export default function App() {
+function Home() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const url = "http://localhost:8000/admin/stuff";
-  const [stuffs, setStuffs] = useState([]);
-  const fetchInfo = () => {
-    return fetch(url)
-      .then((res) => res.json())
-      .then((data) => setStuffs(data.data));
+
+  const [posts, setPosts] = useState([]);
+  const [collection, setCollection] = useState([]);
+  const endPoint = "http://localhost:8000/admin/stuff/";
+  const endPointCollection = "http://localhost:8000/admin/collection/";
+
+  const fetchPosts = async () => {
+    const { data: res } = await axios.get(endPoint);
+    setPosts(res.data);
+  };
+  const fetchCollection = async () => {
+    const { data: res } = await axios.get(endPointCollection);
+    setCollection(res.data);
   };
 
   useEffect(() => {
-    fetchInfo();
+    fetchPosts();
+    fetchCollection();
   }, []);
 
-  const [stuffData, setStuffData] = useState({
+  const [data, setData] = useState({
     name: "",
-    price: "",
-    stock: "",
+    stock: 0,
+    price: 0,
     desc: "",
-    collectionid: "",
+    collectionCollectionID:null,
+    category: "All",
   });
-
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setStuffData((prevData) => ({ ...prevData, [name]: value }));
+    setData((prevData) => ({ ...prevData, [name]: value }));
   };
-  const [selectedStuff, setselectedStuff] = useState("");
-  const handleAddStuff = async (onClose) => {
-    try {
-      const response = await fetch("http://localhost:8000/admin/stuff", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: stuffData.name,
-          category: selectedStuff,
-          price: stuffData.price,
-          stock: stuffData.stock,
-          desc: stuffData.desc,
-          collectionid : stuffData.collectionid
-        }),
-      });
-
-      if (response.ok) {
-        alert("Course added successfully");
-        onClose();
-        window.location.reload();
-      } else {
-        const errorMessage = await response.text();
-        alert(`Error : ${errorMessage}`);
-      }
-    } catch (error) {
-      console.error(`Error : ${error}`);
-      alert("An error occurred while adding course");
-    }
+  const handleCollection = (e) => {
+    setData((prevData) => ({ ...prevData, collectionCollectionID: e.target.value }));
   };
+  const postHandler = async (onClose) => {
+    await axios.post(endPoint, data);
+    onClose();
 
+    fetchPosts();
+  };
 
   return (
-    <>
-      <NavbarComponent />
+    <div className="bg-slate-100">
+      <NavbarAdmin></NavbarAdmin>
 
-      <Button onPress={onOpen} color="primary">Add Stuff</Button>
-      <Modal 
-        isOpen={isOpen} 
-        onOpenChange={onOpenChange}
-        placement="top-center"
-      >
+      <div className="mx-4 lg:mx-24 mt-8">
+        <Button
+          onPress={onOpen}
+          className="mb-4 bg-neutral-950 text-white transition-transform duration-300 transform-gpu hover:scale-110"
+        >
+          <FontAwesomeIcon icon={faPlus} />
+          Add Data
+        </Button>
+        <StuffTable
+          data={posts}
+          fetchPosts={fetchPosts}
+          endPoint={endPoint}
+          collection={collection}
+        ></StuffTable>
+      </div>
+
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="top-center">
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">Add Stuff</ModalHeader>
+              <ModalHeader className="flex flex-col gap-1 ">
+                Add Stuff
+              </ModalHeader>
               <ModalBody>
                 <Input
                   autoFocus
-
                   label="Stuff Name"
                   placeholder="Enter the stuff name"
                   variant="bordered"
-                  name ="name"
+                  name="name"
+                  isRequired
                   onChange={handleChange}
                 />
                 <Input
-                  label="Stock"
-                  placeholder="Enter the amount of stock"
-                  type="stock"
+                  autoFocus
+                  label="Describe"
+                  placeholder="Enter  describtion"
                   variant="bordered"
-                  name ="stock"
+                  name="desc"
+                  isRequired
+                  type="text"
                   onChange={handleChange}
                 />
                 <Input
+                  autoFocus
                   label="Price"
-                  placeholder="Enter the price of the stuff"
-                  type="price"
+                  placeholder="Rp. 0"
                   variant="bordered"
-                  name ="price"
+                  name="price"
+                  isRequired
+                  type="number"
                   onChange={handleChange}
                 />
                 <Input
-                  label="Description"
-                  placeholder="Enter a description"
-                  type="desc"
+                  autoFocus
+                  label="Stock"
+                  placeholder="Rp. 0"
                   variant="bordered"
-                  name ="desc"
+                  name="stock"
+                  isRequired
+                  type="number"
                   onChange={handleChange}
                 />
                 <RadioGroup
-                  id="size"
                   label="Category"
-                  orientation="vertical"
+                  orientation="horizontal"
                   color="default"
-                  value={selectedStuff} // Set the value prop to the state variable
-                  onChange={(e) => setselectedStuff(e.target.value)} // Update the state on change
+                  onChange={handleChange}
+                  name="category"
+                  value={data.category}
                 >
                   <Radio value="All">All</Radio>
                   <Radio value="Men">Men</Radio>
                   <Radio value="Women">Women</Radio>
                 </RadioGroup>
+                <Select
+                  items={collection}
+                  variant="bordered"
+                  label="Collection"
+                  placeholder="Select Collection"
+                  className="max-w-xs"
+                  name="collection"
+                  onChange={handleCollection}
+                >
+                  {(item) => (
+                    <SelectItem
+                      name="collection"
+                      key={item.collectionID}
+                      value={item.collectionID}
+                    >
+                      {item.name}
+                    </SelectItem>
+                  )}
+                </Select>
               </ModalBody>
               <ModalFooter>
-                <Button color="danger" variant="flat" onPress={onClose}>
+                <Button color="default" variant="light" onPress={onClose}>
                   Close
                 </Button>
-                <Button color="primary" onPress={() => handleAddStuff(onClose)}>
+                <Button color="default" onPress={() => postHandler(onClose)}>
                   Submit
                 </Button>
               </ModalFooter>
@@ -150,11 +174,8 @@ export default function App() {
           )}
         </ModalContent>
       </Modal>
-      <TableStuff data={stuffs}/>
-
-            
-    </>
+    </div>
   );
 }
 
-
+export default Home;
