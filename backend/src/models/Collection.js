@@ -15,10 +15,18 @@ const Collection = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    desc: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
     category: {
       type: DataTypes.ENUM,
       values: ["Women", "Men", "All"],
       allowNull:false
+    },
+    image: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
   },
   { 

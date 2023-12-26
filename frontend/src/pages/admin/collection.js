@@ -18,6 +18,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
+import { env } from "../../../env-local";
 
 function Home() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -37,7 +38,9 @@ function Home() {
 
   const [data, setData] = useState({
     name: "",
+    desc: "",
     category: "All",
+    image: "test",
   });
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -62,10 +65,11 @@ function Home() {
           <FontAwesomeIcon icon={faPlus} />
           Add Data
         </Button>
-        <CollectionTable 
-          data={posts} 
+        <CollectionTable
+          data={posts}
           fetchPosts={fetchPosts}
-          endPoint={endPoint}></CollectionTable>
+          endPoint={endPoint}
+        ></CollectionTable>
       </div>
 
       <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="top-center">
@@ -93,6 +97,7 @@ function Home() {
                   name="desc"
                   isRequired
                   type="text"
+                  onChange={handleChange}
                 />
                 <RadioGroup
                   id="size"
@@ -107,12 +112,23 @@ function Home() {
                   <Radio value="Men">Men</Radio>
                   <Radio value="Women">Women</Radio>
                 </RadioGroup>
+{/*                 
+                <form onSubmit={submitHandler} className="mt-4">
+                  <input type="file" name="image"></input>
+                  <button className="btn btn-primary" type="submit">
+                    Send to server
+                  </button>
+                </form> */}
               </ModalBody>
               <ModalFooter>
                 <Button color="default" variant="light" onPress={onClose}>
                   Close
                 </Button>
-                <Button color="default" onPress={() => postHandler(onClose)}>
+                <Button
+                  color="default"
+                  type="submit"
+                  onPress={() => postHandler(onClose)}
+                >
                   Submit
                 </Button>
               </ModalFooter>
