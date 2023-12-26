@@ -20,6 +20,7 @@ import {
   Radio,
   Select,
   SelectItem,
+  Image,
 } from "@nextui-org/react";
 import { useInfiniteScroll } from "@nextui-org/use-infinite-scroll";
 import { useAsyncList } from "@react-stately/data";
@@ -29,6 +30,10 @@ import { faTrash, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
 const columns = [
+  {
+    key: "image",
+    label: "IMAGE",
+  },
   {
     key: "name",
     label: "NAME",
@@ -197,6 +202,15 @@ export default function StuffTable(props) {
                       <FontAwesomeIcon icon={faTrash} />
                     </Button>
                   </>
+                ) : columnKey === "image" ? (
+                  <>
+                    <Image
+                      isZoomed
+                      width={100}
+                      alt={item.name}
+                      src={getKeyValue(item, columnKey)}
+                    />
+                  </>
                 ) : columnKey === "collection" ? (
                   // Kondisi jika columnKey adalah "collection"
                   // Ganti dengan tindakan atau tampilan lain sesuai kebutuhan Anda
@@ -241,7 +255,7 @@ export default function StuffTable(props) {
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1 ">
-                Add Stuff
+              Edit {item.name === ""? "<UNKNOWN>" : item.name}
               </ModalHeader>
               <ModalBody>
                 <Input

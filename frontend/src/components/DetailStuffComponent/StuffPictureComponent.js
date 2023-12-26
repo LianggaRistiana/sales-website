@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Card, CardBody, Image, CardFooter } from "@nextui-org/react";
 import { oneStuff } from "@/data-const";
 
-export default function StuffPictureComponent() {
+export default function StuffPictureComponent(props) {
   return (
     <>
       <div className="grid  gap-4 grid-rows-1 lg:grid-cols-2" data-aos="zoom-out-up"
@@ -11,7 +11,7 @@ export default function StuffPictureComponent() {
         <StuffCard
           id={oneStuff[0].id}
           title={oneStuff[0].title}
-          src={oneStuff[0].path}
+          src={props.image}
         />
       </div>
     </>

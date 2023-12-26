@@ -25,7 +25,7 @@ export default function CollectionComponent(props) {
                 <Link href={`/all-collection/${data.collectionID}`}>
                   <CardCollections
                     key={data.id}
-                    src={props.imagesD}
+                    src={data.image}
                     title={data.name}
                     delay={(data.id % 3) * 150}
                   />

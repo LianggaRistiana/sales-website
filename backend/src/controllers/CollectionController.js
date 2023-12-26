@@ -86,11 +86,13 @@ export const getCollectionById = async (req, res) => {
 // add collection
 export const addCollection = async (req, res) => {
   try {
-    const { name, category } = req.body;
+    const { name, desc, category, image } = req.body;
 
     await Collection.create({
       name,
+      desc,
       category,
+      image
     });
     return res.status(200).json({
       success: true,
@@ -106,12 +108,13 @@ export const addCollection = async (req, res) => {
 export const setCollection = async (req, res) => {
   try {
     const collectionID = req.params.id;
-    const { name, category } = req.body;
+    const { name, category,desc } = req.body;
 
     await Collection.update(
       {
         name,
         category,
+        desc
       },
       {
         where: {

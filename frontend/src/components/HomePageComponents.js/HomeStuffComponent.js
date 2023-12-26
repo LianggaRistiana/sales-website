@@ -50,7 +50,6 @@ function HomeStuffComponent() {
                       large={4}
                       comp={1}
                       items={menStuffs}
-                      imagesD={menStuff[0].path}
                     />
                   </CardBody>
                 </Card>
@@ -63,7 +62,6 @@ function HomeStuffComponent() {
                       large={4}
                       comp={1}
                       items={womenStuffs}
-                      imagesD={womenStuff[0].path}
                     />
                   </CardBody>
                 </Card>

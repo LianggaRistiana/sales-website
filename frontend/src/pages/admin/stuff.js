@@ -19,6 +19,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
+import { env } from "../../../env-local";
+
 function Home() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
@@ -46,15 +48,19 @@ function Home() {
     stock: 0,
     price: 0,
     desc: "",
-    collectionCollectionID:null,
+    collectionCollectionID: null,
     category: "All",
+    image: "",
   });
   const handleChange = (e) => {
     const { name, value } = e.target;
     setData((prevData) => ({ ...prevData, [name]: value }));
   };
   const handleCollection = (e) => {
-    setData((prevData) => ({ ...prevData, collectionCollectionID: e.target.value }));
+    setData((prevData) => ({
+      ...prevData,
+      collectionCollectionID: e.target.value,
+    }));
   };
   const postHandler = async (onClose) => {
     await axios.post(endPoint, data);
@@ -63,6 +69,24 @@ function Home() {
     fetchPosts();
   };
 
+  const endPointImage = `https://api.imgbb.com/1/upload?key=${env.API_KEY}`;
+  const submitHandler = async (event) => {
+    event.preventDefault();
+    const form = new FormData(event.target);
+    const image = form.get("image");
+
+    const data = new FormData();
+    data.append("image", image);
+
+    axios
+      .post(endPointImage, data)
+      .then((response) => {
+        setData((prevData) => ({ ...prevData, image: response.data.data.url }));
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
   return (
     <div className="bg-slate-100">
       <NavbarAdmin></NavbarAdmin>
@@ -161,6 +185,13 @@ function Home() {
                     </SelectItem>
                   )}
                 </Select>
+
+                <form onSubmit={submitHandler} className="mt-4 flex">
+                  <input type="file" name="image"></input>
+                  <button className="text-xs" type="submit">
+                    Send to server
+                  </button>
+                </form>
               </ModalBody>
               <ModalFooter>
                 <Button color="default" variant="light" onPress={onClose}>

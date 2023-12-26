@@ -47,12 +47,33 @@ function Home() {
     setData((prevData) => ({ ...prevData, [name]: value }));
   };
   const postHandler = async (onClose) => {
-    await axios.post(endPoint, data);
+    try {
+      await axios.post(endPoint, data);
+    } catch (error) {
+      console.log(error);
+    }
     onClose();
-
     fetchPosts();
   };
 
+  const endPointImage = `https://api.imgbb.com/1/upload?key=${env.API_KEY}`;
+  const submitHandler = async (event) => {
+    event.preventDefault();
+    const form = new FormData(event.target);
+    const image = form.get("image");
+
+    const data = new FormData();
+    data.append("image", image);
+
+    axios
+      .post(endPointImage, data)
+      .then((response) => {
+        setData((prevData) => ({ ...prevData, image: response.data.data.url }));
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
   return (
     <div className="bg-slate-100">
       <NavbarAdmin></NavbarAdmin>
@@ -112,13 +133,13 @@ function Home() {
                   <Radio value="Men">Men</Radio>
                   <Radio value="Women">Women</Radio>
                 </RadioGroup>
-{/*                 
-                <form onSubmit={submitHandler} className="mt-4">
+
+                <form onSubmit={submitHandler} className="mt-4 flex">
                   <input type="file" name="image"></input>
-                  <button className="btn btn-primary" type="submit">
+                  <button className="text-xs" type="submit">
                     Send to server
                   </button>
-                </form> */}
+                </form>
               </ModalBody>
               <ModalFooter>
                 <Button color="default" variant="light" onPress={onClose}>

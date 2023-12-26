@@ -18,6 +18,7 @@ import {
   Input,
   RadioGroup,
   Radio,
+  Image,
 } from "@nextui-org/react";
 import { useInfiniteScroll } from "@nextui-org/use-infinite-scroll";
 import { useAsyncList } from "@react-stately/data";
@@ -28,12 +29,20 @@ import axios from "axios";
 
 const columns = [
   {
+    key: "image",
+    label: "IMAGE",
+  },
+  {
     key: "name",
     label: "NAME",
   },
   {
     key: "category",
     label: "CATEGORY",
+  },
+  {
+    key: "desc",
+    label: "DESCRIPTION",
   },
   {
     key: "Action",
@@ -114,7 +123,7 @@ export default function CollectionTable(props) {
     onOpenEdit();
   };
   const editHandler = async (onClose) => {
-    await axios.put(endPoint + item.collectionID,item);
+    await axios.put(endPoint + item.collectionID, item);
     fetchPosts();
     onClose();
   };
@@ -172,6 +181,15 @@ export default function CollectionTable(props) {
                         <FontAwesomeIcon icon={faTrash} />
                       </Button>
                     </>
+                  ) : columnKey === "image" ? (
+                    <>
+                      <Image
+                        isZoomed
+                        width={100}
+                        alt={item.name}
+                        src={getKeyValue(item, columnKey)}
+                      />
+                    </>
                   ) : (
                     getKeyValue(item, columnKey)
                   )}
@@ -210,7 +228,7 @@ export default function CollectionTable(props) {
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1 ">
-                Edit {item.name}
+                Edit {item.name === ""? "<UNKNOWN>" : item.name}
               </ModalHeader>
               <ModalBody>
                 <Input
@@ -226,12 +244,13 @@ export default function CollectionTable(props) {
                 <Input
                   autoFocus
                   label="Describe"
-                  placeholder="Enter  describtion"
+                  placeholder="Enter describtion"
                   variant="bordered"
-                  name="desc"
                   isRequired
                   type="text"
+                  name="desc"
                   value={item.desc}
+                  onChange={handleChange}
                 />
                 <RadioGroup
                   id="size"

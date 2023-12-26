@@ -21,7 +21,7 @@ export default function AllStuffComponent(props) {
               <StuffCard
                 key={data.stuffID}
                 stuffKey={data.stuffID}
-                src={props.imagesD}
+                image={data.image}
                 price={data.price}
                 title={data.name}
                 delay={(data.id % 4) * 150}
@@ -50,11 +50,10 @@ function StuffCard(props) {
             <Image
               shadow="sm"
               radius="lg"
-              width={280}
-              height={400}
               alt={props.title}
-              className="w-full h-full object-cover h-[300px]"
-              src={props.src}
+              className="w-full h-full object-cover h-[290px]"
+              src={props.image}
+               width={280} height={400}
             />
           </CardBody>
           <CardFooter className="text-small justify-center bg-[#000000] ">
@@ -69,21 +68,21 @@ function StuffCard(props) {
   );
 }
 
-function Stuff(props) {
-  const source = props.source;
-  const name = props.name;
-  const price = props.price;
-  return (
-    <div className="">
-      <Image
-        src={source}
-        width={280}
-        height={400}
-        className="rounded-md "
-        alt="Picture of Stuff"
-      ></Image>
-      <h1 className="mt-2 text-[12px]">{name}</h1>
-      <h1 className=" font-bold text-[12px]">{price}</h1>
-    </div>
-  );
-}
+// function Stuff(props) {
+//   const source = props.source;
+//   const name = props.name;
+//   const price = props.price;
+//   return (
+//     <div className="">
+//       <Image
+//         src={source}
+//         width={280}
+//         height={400}
+//         className="rounded-md "
+//         alt="Picture of Stuff"
+//       ></Image>
+//       <h1 className="mt-2 text-[12px]">{name}</h1>
+//       <h1 className=" font-bold text-[12px]">{price}</h1>
+//     </div>
+//   );
+// }

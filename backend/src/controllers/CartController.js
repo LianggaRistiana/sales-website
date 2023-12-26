@@ -7,7 +7,7 @@ export const getCart = async (req, res) => {
     const carts = await Cart.findAll({
         include: [{
             model: Stuff,
-            attributes: ['price','category','name'] // Attribut dari tabel Category yang ingin Anda ambil
+            attributes: ['price','category','name','image'] // Attribut dari tabel Category yang ingin Anda ambil
           }]
     });
 

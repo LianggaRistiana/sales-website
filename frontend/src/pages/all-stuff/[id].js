@@ -123,7 +123,7 @@ export default function Home() {
       <NavbarComponent />
       <div className="md:mx-48 mx-4">
         <div className="md:flex mt-12 md:justify-center">
-          <StuffPictureComponent />
+          <StuffPictureComponent image={stuffs.image} />
           <StuffMainDescComponent items={stuffs}/>
         </div>
         <StuffSecDescComponent items={stuffs}/>

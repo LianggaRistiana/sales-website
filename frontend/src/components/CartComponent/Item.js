@@ -10,6 +10,7 @@ export default function Item(props) {
   const price = data.stuff.price;
   const category = data.stuff.category;
   const name = data.stuff.name;
+  const image = data.stuff.image;
 
   const handleDeleteChapter = async () => {
     try {
@@ -44,9 +45,9 @@ export default function Item(props) {
               radius="lg"
               width={100}
               height={200}
-              alt={oneStuff[0].title}
+              alt={name}
               className="object-cover"
-              src={oneStuff[0].path}
+              src={image}
             />
             <div className="ml-4">
               <h1 className="font-bold text-[24px] max-w-[200px]">{name}</h1>

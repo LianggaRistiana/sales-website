@@ -76,7 +76,7 @@ export const getStuffById = async (req, res) => {
 // add stuff
 export const addStuff = async (req, res) => {
   try {
-    const { name, category, stock, price, desc,collectionCollectionID } = req.body;
+    const { name, category, stock, price, image, desc,collectionCollectionID } = req.body;
     if (stock < 0) {
       return res.status(200).json({
         success: false,
@@ -96,6 +96,7 @@ export const addStuff = async (req, res) => {
       stock,
       price,
       desc,
+      image,
       collectionCollectionID,
     });
     return res.status(200).json({
@@ -112,7 +113,7 @@ export const addStuff = async (req, res) => {
 export const setStuff = async (req, res) => {
   try {
     const stuffID = req.params.id;
-    const { name, category, stock, price, desc,collectionCollectionID } = req.body;
+    const { name, category, stock, price,image,  desc,collectionCollectionID } = req.body;
     if (stock < 0) {
       return res.status(200).json({
         success: false,
@@ -132,6 +133,7 @@ export const setStuff = async (req, res) => {
         stock,
         price,
         desc,
+        image,
         collectionCollectionID,
       },
       {
